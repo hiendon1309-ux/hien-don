@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chợ Hải Sản Anh Khoa – hải sản tươi sống, đông lạnh tại Tây Mỗ, Hà Nội. Bảng giá tham khảo, công thức nấu ăn, miễn phí sơ chế và hấp.">
+<link rel="icon" href="images/logo.jpg">
+<title>Hải Sản Anh Khoa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@1,600&display=swap">
+<link rel="stylesheet" href="assets/tailwind.css">
+<style>
+  html { color-scheme: light; }
+  [hidden] { display: none !important; }
+  body { background:#ffffff; color:#0A3552; font-family:"Be Vietnam Pro", system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+  @keyframes drift { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  .bob { animation: bob 5s ease-in-out infinite; }
+  .wave-track { animation: drift 18s linear infinite; }
+  @media (prefers-reduced-motion: reduce) { .bob, .wave-track { animation: none; } }
+  .toast { transition: opacity .25s, transform .25s; }
+  .nav-link { color: rgba(10,53,82,.7); border-color: transparent; }
+  .nav-link:hover { color: #0B5886; border-color: #7FC5EA; }
+  .nav-link.is-active { color: #0B5886; border-color: #0A6DA6; }
+  .chip { border: 1px solid #B9E0F4; background: #fff; color: #0D4A6F; border-radius: 9999px; padding: .5rem 1rem; font-size: .875rem; font-weight: 600; }
+  .chip:hover { border-color: #3DA5DC; }
+  .chip.is-active { background: #0A6DA6; border-color: #0A6DA6; color: #fff; }
+  body.modal-open { overflow: hidden; }
+  /* Menu điện thoại: trượt xuống mượt bằng grid-template-rows */
+  .mobile-menu { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .mobile-menu.is-open { grid-template-rows: 1fr; }
+  .mobile-menu > div { min-height: 0; }
+  .mobile-menu li { opacity: 0; transform: translateY(-6px); transition: opacity .25s, transform .25s; }
+  .mobile-menu.is-open li { opacity: 1; transform: none; }
+  .mobile-menu.is-open li:nth-child(2) { transition-delay: .03s } .mobile-menu.is-open li:nth-child(3) { transition-delay: .06s }
+  .mobile-menu.is-open li:nth-child(4) { transition-delay: .09s } .mobile-menu.is-open li:nth-child(5) { transition-delay: .12s }
+  .mobile-menu.is-open li:nth-child(6) { transition-delay: .15s }
+  .m-nav-link { color: #0A3552; } .m-nav-link:hover { background: #F2F9FD; }
+  .m-nav-link.is-active { background: #E0F1FA; color: #0B5886; }
+  .burger { position: relative; width: 20px; height: 14px; display: block; }
+  .burger span { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px; background: currentColor; transition: transform .3s, opacity .2s, top .3s; }
+  .burger span:nth-child(1) { top: 0 } .burger span:nth-child(2) { top: 6px } .burger span:nth-child(3) { top: 12px }
+  [aria-expanded="true"] .burger span:nth-child(1) { top: 6px; transform: rotate(45deg); }
+  [aria-expanded="true"] .burger span:nth-child(2) { opacity: 0; }
+  [aria-expanded="true"] .burger span:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+  @media (prefers-reduced-motion: reduce) { .mobile-menu, .mobile-menu li, .burger span { transition: none; } }
+  @media (max-width: 767px) {
+    body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+    #toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  }
+  .sub-chip { border-radius: 9999px; padding: .375rem .875rem; font-size: .8125rem; font-weight: 600; color: #0B5886; background: #F2F9FD; }
+  .sub-chip:hover { background: #E0F1FA; }
+  .sub-chip.is-active { background: #0B5886; color: #fff; }
+  .acc-tab { color: #0B5886; }
+  .acc-tab.is-active { background: #fff; color: #0A3552; box-shadow: 0 1px 3px rgba(10,53,82,.15); }
+  .zalo-btn { background: #0068FF; color: #fff; box-shadow: 0 8px 20px -8px rgba(0,104,255,.6); transition: background .2s, transform .15s, box-shadow .2s; }
+  .zalo-btn:hover { background: #0052CC; box-shadow: 0 10px 24px -8px rgba(0,82,204,.7); transform: translateY(-1px); }
+  .zalo-btn:active { transform: translateY(0) scale(.98); }
+  .zalo-btn:disabled { background: #9DBFF5; box-shadow: none; transform: none; cursor: not-allowed; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #3DA5DC; outline-offset: 2px; }
+</style>
+</head>
+<body class="antialiased">
+
+
+<!-- ============ TOP BAR ============ -->
+<div class="bg-ocean-900 text-ocean-100 text-xs sm:text-sm">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-center sm:justify-between gap-2">
+    <p class="hidden sm:block">Miễn phí sơ chế · Ship tận nhà · Tặng sả &amp; nước chấm · Miễn phí hấp</p>
+    <p class="font-semibold tabular">Hotline: 0985 450 429 · 0784 86 8386</p>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-ocean-100">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center gap-2 sm:gap-6">
+    <!-- Logo -->
+    <a href="#trang-chu" class="flex items-center gap-2 shrink-0" aria-label="Hải Sản Anh Khoa - Trang chủ">
+      <img src="images/logo.jpg" alt="Logo Hải Sản Anh Khoa" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover ring-2 ring-ocean-100 bg-white">
+      <span class="leading-tight">
+        <span class="block text-base sm:text-lg font-extrabold text-ocean-800 tracking-tight">Hải Sản Anh Khoa</span>
+        <span class="block text-[11px] uppercase tracking-[0.14em] text-ocean-500">Tươi sống mỗi ngày</span>
+      </span>
+    </a>
+
+    <!-- Search -->
+    <form id="searchForm" class="order-3 w-full md:order-none md:w-auto md:flex-1" role="search">
+      <label for="search" class="sr-only">Tìm sản phẩm</label>
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ocean-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/></svg>
+        <input id="search" type="search" placeholder="Tìm cua, tôm, mực, ghẹ…" class="w-full rounded-full border border-ocean-200 bg-ocean-50 py-2.5 pl-10 pr-24 text-sm placeholder:text-ocean-400 focus:bg-white focus:border-ocean-400">
+        <button type="submit" class="absolute right-1 top-1 bottom-1 rounded-full bg-ocean-600 px-4 text-sm font-semibold text-white hover:bg-ocean-700">Tìm</button>
+      </div>
+    </form>
+
+    <button id="menuBtn" type="button" class="ml-auto md:hidden grid place-items-center w-10 h-10 rounded-full hover:bg-ocean-50 text-ocean-900" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+
+  <!-- Menu ngang -->
+  <nav class="hidden md:block border-t border-ocean-100 bg-white" aria-label="Menu chính">
+    <ul class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto text-sm font-semibold">
+      <li><a href="#trang-chu" data-nav="trang-chu" class="nav-link block whitespace-nowrap px-4 py-3 border-b-2">Trang chủ</a></li>
+      <li><a href="#san-pham" data-nav="san-pham" class="nav-link block whitespace-nowrap px-4 py-3 border-b-2">Sản phẩm</a></li>
+      <li><a href="#goc-bep" data-nav="goc-bep" class="nav-link block whitespace-nowrap px-4 py-3 border-b-2">Góc Bếp / Công thức</a></li>
+      <li><a href="#ve-chung-toi" data-nav="ve-chung-toi" class="nav-link block whitespace-nowrap px-4 py-3 border-b-2">Về chúng tôi</a></li>
+      <li><a href="#lien-he" data-nav="lien-he" class="nav-link block whitespace-nowrap px-4 py-3 border-b-2">Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <!-- Menu điện thoại: trượt xuống khi bấm nút ☰ -->
+  <div id="mobileMenu" class="mobile-menu md:hidden" aria-hidden="true">
+    <div class="overflow-hidden">
+      <nav class="border-t border-ocean-100 bg-white px-4 pb-4" aria-label="Menu điện thoại">
+        <ul class="py-2 text-base font-semibold">
+          <li><a href="#trang-chu" data-nav="trang-chu" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Trang chủ <span aria-hidden="true">›</span></a></li>
+          <li><a href="#san-pham" data-nav="san-pham" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Sản phẩm <span aria-hidden="true">›</span></a></li>
+          <li><a href="#goc-bep" data-nav="goc-bep" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Góc Bếp / Công thức <span aria-hidden="true">›</span></a></li>
+          <li><a href="#ve-chung-toi" data-nav="ve-chung-toi" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Về chúng tôi <span aria-hidden="true">›</span></a></li>
+          <li><a href="#lien-he" data-nav="lien-he" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Liên hệ <span aria-hidden="true">›</span></a></li>
+          <li><a href="#ho-tro" data-nav="ho-tro" class="m-nav-link flex items-center justify-between rounded-xl px-3 py-3">Hỗ trợ khách hàng <span aria-hidden="true">›</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+ <!-- ================================================= -->
+ <!-- ============ TRANG CHỦ (view-home) ============== -->
+ <!-- ================================================= -->
+ <div id="view-home">
+  <!-- ============ HERO BANNER ============ -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-ocean-700 via-ocean-600 to-ocean-500 text-white">
+    <!-- light rays -->
+    <div class="pointer-events-none absolute inset-0 opacity-20" style="background: radial-gradient(60% 50% at 75% 10%, #ffffff 0%, transparent 70%);"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 pt-12 pb-28 sm:pt-16 sm:pb-36 grid gap-10 lg:grid-cols-2 items-center">
+      <div>
+        <p class="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]">
+          <span class="w-2 h-2 rounded-full bg-emerald-300"></span> Hàng về sáng nay
+        </p>
+        <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
+          Hải sản tươi rói,<br>
+          <span class="font-script italic font-semibold text-ocean-100">từ biển đến bếp nhà bạn</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-base sm:text-lg text-ocean-50/90">
+          Cua, tôm, mực, ghẹ còn bơi trong bể. Chọn con nào, sơ chế con đó, hấp miễn phí, đóng thùng xốp đá lạnh giao tận cửa.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#san-pham" class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-bold text-ocean-700 shadow-lg shadow-ocean-900/20 hover:bg-ocean-50">
+            Xem bảng giá
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#goc-bep" class="inline-flex items-center rounded-full border border-white/50 px-6 py-3.5 font-semibold hover:bg-white/10">Xem Góc Bếp</a>
+        </div>
+        <dl class="mt-10 grid grid-cols-3 gap-4 max-w-md text-center">
+          <div class="rounded-2xl bg-white/10 px-2 py-3"><dt class="text-xs text-ocean-100">Cơ sở</dt><dd class="text-2xl font-extrabold tabular">02</dd></div>
+          <div class="rounded-2xl bg-white/10 px-2 py-3"><dt class="text-xs text-ocean-100">Sơ chế</dt><dd class="text-2xl font-extrabold">0đ</dd></div>
+          <div class="rounded-2xl bg-white/10 px-2 py-3"><dt class="text-xs text-ocean-100">Giao hàng</dt><dd class="text-2xl font-extrabold">0đ</dd></div>
+        </dl>
+      </div>
+
+      <!-- Hero illustration: platter of seafood -->
+      <div class="relative mx-auto w-full max-w-lg">
+        <div class="absolute inset-6 rounded-full bg-ocean-300/30 blur-2xl"></div>
+        <!-- ẢNH THẬT: đặt file images/hero.jpg (ảnh ngang hoặc vuông). Có ảnh thì hình vẽ SVG tự ẩn -->
+        <img src="images/hero.jpg" alt="Mâm hải sản tươi của Hải Sản Anh Khoa" class="relative w-full aspect-[4/3] object-cover rounded-[2rem] shadow-2xl shadow-ocean-950/30 ring-4 ring-white/30" onload="this.nextElementSibling && this.nextElementSibling.remove()" onerror="this.remove()">
+        <svg viewBox="0 0 480 400" class="relative w-full bob" role="img" aria-label="Mâm hải sản gồm cua, tôm, mực và chanh">
+          <!-- platter -->
+          <ellipse cx="240" cy="270" rx="220" ry="92" fill="#0D4A6F" opacity=".35"/>
+          <ellipse cx="240" cy="255" rx="214" ry="88" fill="#F2F9FD"/>
+          <ellipse cx="240" cy="250" rx="190" ry="74" fill="#E0F1FA"/>
+          <!-- ice bits -->
+          <g fill="#ffffff" opacity=".9">
+            <rect x="100" y="250" width="22" height="18" rx="4" transform="rotate(-12 111 259)"/>
+            <rect x="330" y="262" width="24" height="18" rx="4" transform="rotate(10 342 271)"/>
+            <rect x="220" y="292" width="20" height="16" rx="4"/>
+            <rect x="370" y="228" width="18" height="14" rx="4"/>
+          </g>
+          <!-- lettuce -->
+          <path d="M95 235c20-30 60-30 80-10-25 5-50 20-80 10z" fill="#58B86B"/>
+          <path d="M300 215c30-25 80-20 95 5-30 0-60 8-95-5z" fill="#6CC47C"/>
+          <!-- crab -->
+          <g transform="translate(245 205)">
+            <g stroke="#C8452C" stroke-width="7" stroke-linecap="round" fill="none">
+              <path d="M-55 10 -85 30 -95 50"/><path d="M-50 22 -75 45 -80 62"/><path d="M-40 30 -58 55"/>
+              <path d="M55 10 85 30 95 50"/><path d="M50 22 75 45 80 62"/><path d="M40 30 58 55"/>
+              <path d="M-40 -18 -70 -45"/><path d="M40 -18 70 -45"/>
+            </g>
+            <path d="M-92 -62c-12 6-10 26 6 30l14-12-2-22z" fill="#E4583B"/>
+            <path d="M-78 -66l16 6-12 16z" fill="#F07B5E"/>
+            <path d="M92 -62c12 6 10 26-6 30l-14-12 2-22z" fill="#E4583B"/>
+            <path d="M78 -66l-16 6 12 16z" fill="#F07B5E"/>
+            <ellipse cx="0" cy="0" rx="68" ry="46" fill="#E4583B"/>
+            <ellipse cx="0" cy="-8" rx="52" ry="28" fill="#F07B5E"/>
+            <circle cx="-16" cy="-40" r="7" fill="#fff"/><circle cx="-16" cy="-40" r="3.5" fill="#0A3552"/>
+            <circle cx="16" cy="-40" r="7" fill="#fff"/><circle cx="16" cy="-40" r="3.5" fill="#0A3552"/>
+            <path d="M-12 8q12 10 24 0" stroke="#A8361F" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- shrimps -->
+          <g transform="translate(125 285) rotate(-18)">
+            <path d="M0 0c10-30 50-38 72-18 10 9 10 24 0 30-14-10-34-12-50 0z" fill="#FF8A5C"/>
+            <path d="M22 12c4-10 14-16 26-14M40 12c2-8 10-14 20-13" stroke="#E4583B" stroke-width="3" fill="none"/>
+            <path d="M0 0-18 -8-14 10z" fill="#FF8A5C"/>
+            <path d="M70 -12c16-14 32-20 44-18" stroke="#E4583B" stroke-width="2" fill="none"/>
+            <circle cx="62" cy="-6" r="3" fill="#0A3552"/>
+          </g>
+          <g transform="translate(300 300) rotate(12)">
+            <path d="M0 0c10-30 50-38 72-18 10 9 10 24 0 30-14-10-34-12-50 0z" fill="#FF9B70"/>
+            <path d="M22 12c4-10 14-16 26-14M40 12c2-8 10-14 20-13" stroke="#E4583B" stroke-width="3" fill="none"/>
+            <path d="M0 0-18 -8-14 10z" fill="#FF9B70"/>
+            <path d="M70 -12c16-14 32-20 44-18" stroke="#E4583B" stroke-width="2" fill="none"/>
+            <circle cx="62" cy="-6" r="3" fill="#0A3552"/>
+          </g>
+          <!-- squid -->
+          <g transform="translate(380 180) rotate(35)">
+            <path d="M0 -60c18 18 24 50 18 72h-36c-6-22 0-54 18-72z" fill="#F5D6C6"/>
+            <path d="M-18 -40 0 -60 18 -40z" fill="#EBBFA9"/>
+            <g stroke="#EBBFA9" stroke-width="5" stroke-linecap="round" fill="none">
+              <path d="M-14 12c-4 14 0 24-6 34"/><path d="M-5 12c0 16 2 24-2 36"/><path d="M5 12c0 16-2 24 2 36"/><path d="M14 12c4 14 0 24 6 34"/>
+            </g>
+            <circle cx="-7" cy="4" r="3" fill="#0A3552"/><circle cx="7" cy="4" r="3" fill="#0A3552"/>
+          </g>
+          <!-- lemon -->
+          <g transform="translate(90 190)">
+            <circle r="24" fill="#FFD84D"/><circle r="18" fill="#FFF0A8"/>
+            <g stroke="#FFD84D" stroke-width="2.5"><path d="M0 -18V18M-18 0H18M-13 -13 13 13M13 -13-13 13"/></g>
+          </g>
+          <!-- bubbles -->
+          <g fill="none" stroke="#ffffff" stroke-width="2" opacity=".7">
+            <circle cx="60" cy="70" r="8"/><circle cx="80" cy="40" r="5"/><circle cx="420" cy="60" r="10"/><circle cx="445" cy="100" r="5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- waves -->
+    <div class="absolute bottom-0 left-0 w-full h-20 overflow-hidden" aria-hidden="true">
+      <div class="wave-track flex w-[200%] h-full">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="w-1/2 h-full"><path d="M0 40c150-30 300-30 450 0s300 30 450 0 225-30 300-10V80H0z" fill="#ffffff" opacity=".35"/><path d="M0 55c150-25 300-25 450 0s300 25 450 0 225-25 300-8V80H0z" fill="#ffffff"/></svg>
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="w-1/2 h-full"><path d="M0 40c150-30 300-30 450 0s300 30 450 0 225-30 300-10V80H0z" fill="#ffffff" opacity=".35"/><path d="M0 55c150-25 300-25 450 0s300 25 450 0 225-25 300-8V80H0z" fill="#ffffff"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAM KẾT ============ -->
+  <section class="max-w-7xl mx-auto px-4 -mt-2">
+    <ul class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <li class="flex items-center gap-3 rounded-2xl border border-ocean-100 p-4">
+        <span class="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-ocean-50 text-ocean-600"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12c3-4 6-6 10-6s7 2 10 6c-3 4-6 6-10 6s-7-2-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+        <div><p class="font-bold text-sm">Tươi sống tại bể</p><p class="text-xs text-ocean-900/60">Chọn tận mắt, cân tận nơi</p></div>
+      </li>
+      <li class="flex items-center gap-3 rounded-2xl border border-ocean-100 p-4">
+        <span class="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-ocean-50 text-ocean-600"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3v8a3 3 0 0 0 6 0V3M9 3v18M18 3c-2 2-3 5-3 8h3v10"/></svg></span>
+        <div><p class="font-bold text-sm">Sơ chế, hấp miễn phí</p><p class="text-xs text-ocean-900/60">Tặng sả + nước chấm hải sản</p></div>
+      </li>
+      <li class="flex items-center gap-3 rounded-2xl border border-ocean-100 p-4">
+        <span class="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-ocean-50 text-ocean-600"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></span>
+        <div><p class="font-bold text-sm">Giao nhanh, miễn phí</p><p class="text-xs text-ocean-900/60">P. Tây Mỗ &amp; bán kính 5 km</p></div>
+      </li>
+      <li class="flex items-center gap-3 rounded-2xl border border-ocean-100 p-4">
+        <span class="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-ocean-50 text-ocean-600"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <div><p class="font-bold text-sm">Nguồn gốc rõ ràng</p><p class="text-xs text-ocean-900/60">Hàng lấy từ Quảng Ninh</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ DANH MỤC SẢN PHẨM ============ -->
+  <section id="danh-muc" class="max-w-7xl mx-auto px-4 pt-16 scroll-mt-32">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Danh mục</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Mua theo nhóm hàng</h2>
+      </div>
+      <a href="#san-pham" data-goto-group="" data-goto-cat="" class="text-sm font-semibold text-ocean-600 hover:text-ocean-800">Tất cả 70 mặt hàng →</a>
+    </div>
+    <div id="homeCats" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"></div>
+  </section>
+
+  <!-- ============ SẢN PHẨM NỔI BẬT (dữ liệu lấy từ bảng giá PRODUCTS trong script) ============ -->
+  <section id="noi-bat" class="max-w-7xl mx-auto px-4 py-16 scroll-mt-32">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Sản phẩm nổi bật</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Hôm nay chợ có gì?</h2>
+      </div>
+      <a href="#san-pham" class="text-sm font-semibold text-ocean-600 hover:text-ocean-800">Xem bảng giá đầy đủ →</a>
+    </div>
+    <div id="featuredGrid" class="mt-8 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </section>
+
+  <!-- ============ ẢNH THẬT TẠI CỬA HÀNG ============ -->
+  <section class="max-w-7xl mx-auto px-4 pb-16">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Ảnh thật tại cửa hàng</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Hàng nào cũng tươi như trong ảnh</h2>
+      </div>
+      <p class="text-sm text-ocean-900/60">Bề bề, tôm hùm, ngao, mực… về hàng mỗi ngày</p>
+    </div>
+    <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <figure class="relative overflow-hidden rounded-2xl aspect-square bg-ocean-50"><img src="images/cua-hang/be-be.jpg" alt="Bề bề tươi" class="w-full h-full object-cover hover:scale-105 transition duration-500"><figcaption class="absolute left-2 bottom-2 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-ocean-900">Bề bề</figcaption></figure>
+      <figure class="relative overflow-hidden rounded-2xl aspect-square bg-ocean-50"><img src="images/cua-hang/tom-hap.jpg" alt="Tôm hấp chín tại Hải Sản Anh Khoa" class="w-full h-full object-cover hover:scale-105 transition duration-500"><figcaption class="absolute left-2 bottom-2 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-ocean-900">Tôm hấp sẵn</figcaption></figure>
+      <figure class="relative overflow-hidden rounded-2xl aspect-square bg-ocean-50"><img src="images/cua-hang/ngao.jpg" alt="Ngao sống trong bể" class="w-full h-full object-cover hover:scale-105 transition duration-500"><figcaption class="absolute left-2 bottom-2 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-ocean-900">Ngao sống</figcaption></figure>
+      <figure class="relative overflow-hidden rounded-2xl aspect-square bg-ocean-50"><img src="images/cua-hang/muc-the.jpg" alt="Mực tươi kèm danh thiếp Chợ Hải Sản Anh Khoa" class="w-full h-full object-cover hover:scale-105 transition duration-500"><figcaption class="absolute left-2 bottom-2 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-ocean-900">Mực tươi</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ GỢI Ý MÓN NGON MỖI NGÀY ============ -->
+  <section id="goi-y-mon" class="bg-ocean-50 scroll-mt-32">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Gợi ý món ngon mỗi ngày</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Mua xong, nấu sao cho ngon?</h2>
+          <p class="mt-2 max-w-xl text-ocean-900/70">Công thức dễ làm cho từng loại hải sản. Mua ở cửa hàng, nhờ sơ chế sẵn là về nấu ngay.</p>
+        </div>
+        <a href="#goc-bep" class="inline-flex items-center gap-2 rounded-full bg-ocean-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-ocean-700">Vào Góc Bếp →</a>
+      </div>
+      <div id="homeRecipes" class="mt-8 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+  </section>
+ </div><!-- /view-home -->
+ <!-- ================================================= -->
+ <!-- ============ SẢN PHẨM (view-products) =========== -->
+ <!-- ================================================= -->
+ <div id="view-products" hidden>
+  <section class="bg-ocean-50 border-b border-ocean-100">
+    <div class="max-w-7xl mx-auto px-4 py-10 sm:py-12">
+      <nav class="text-sm text-ocean-900/60" aria-label="Breadcrumb">
+        <a href="#trang-chu" class="hover:text-ocean-700">Trang chủ</a> <span class="mx-1">/</span> <span class="font-semibold text-ocean-700">Sản phẩm</span>
+      </nav>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Bảng giá hải sản tham khảo</h1>
+      <p class="mt-3 max-w-2xl text-ocean-900/70">Giá theo giá chợ, có thể thay đổi theo ngày. Gọi <strong class="tabular text-ocean-800">0985 450 429</strong> hoặc nhắn Zalo để hỏi hàng về hôm nay, hoặc ghé trực tiếp cửa hàng.</p>
+      <ul class="mt-5 flex flex-wrap gap-2 text-sm font-semibold text-ocean-800">
+        <li class="rounded-full bg-white border border-ocean-200 px-3 py-1.5">Miễn phí sơ chế + ship tận nhà</li>
+        <li class="rounded-full bg-white border border-ocean-200 px-3 py-1.5">Miễn phí sả + nước chấm hải sản</li>
+        <li class="rounded-full bg-white border border-ocean-200 px-3 py-1.5">Miễn phí hấp</li>
+        <li class="rounded-full bg-white border border-ocean-200 px-3 py-1.5">Miễn phí thùng xốp + đá</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="sticky z-30 bg-white/95 backdrop-blur border-b border-ocean-100" style="top: var(--header-h, 0px)">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div id="prodGroups" class="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Lọc theo nhóm lớn"></div>
+      <div id="prodFilters" class="mt-2 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Lọc theo nhóm nhỏ" hidden></div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <p id="prodQuery" class="text-sm text-ocean-900/70" hidden>Kết quả cho "<strong id="prodQueryText" class="text-ocean-900"></strong>" <button id="prodQueryClear" type="button" class="ml-2 font-semibold text-ocean-600 underline underline-offset-2">Xóa tìm kiếm</button></p>
+      <p id="prodCount" class="ml-auto text-sm text-ocean-900/50 tabular"></p>
+    </div>
+    <div id="prodList" class="mt-4 space-y-10"></div>
+    <p id="prodEmpty" class="mt-6 rounded-2xl bg-ocean-50 p-6 text-center text-ocean-800" hidden>Chưa có mặt hàng khớp với từ khóa. Gọi <strong class="tabular">0985 450 429</strong> để hỏi hàng hôm nay nhé.</p>
+  </div>
+ </div><!-- /view-products -->
+ <!-- ================================================= -->
+ <!-- ============ CHI TIẾT SẢN PHẨM (view-product) ==== -->
+ <!-- ================================================= -->
+ <div id="view-product" hidden>
+  <div id="productDetail" class="max-w-7xl mx-auto px-4 py-8 sm:py-12"></div>
+ </div><!-- /view-product -->
+
+ <!-- ================================================= -->
+ <!-- ============ VỀ CHÚNG TÔI (view-about) ========== -->
+ <!-- ================================================= -->
+ <div id="view-about" hidden>
+  <section class="relative overflow-hidden bg-ocean-900 text-white">
+    <img src="images/cua-hang/mat-tien.jpg" alt="Mặt tiền Chợ Hải Sản Anh Khoa tại 128 Tây Mỗ" class="absolute inset-0 w-full h-full object-cover opacity-35">
+    <div class="absolute inset-0 bg-gradient-to-r from-ocean-950/90 via-ocean-900/70 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-16 sm:py-24">
+      <nav class="text-sm text-ocean-100/80" aria-label="Breadcrumb">
+        <a href="#trang-chu" class="hover:text-white">Trang chủ</a> <span class="mx-1">/</span> <span class="font-semibold text-white">Về chúng tôi</span>
+      </nav>
+      <p class="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-ocean-200">Chợ Hải Sản Anh Khoa</p>
+      <h1 class="mt-3 max-w-2xl text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">Sạch – Tự nhiên – <span class="font-script italic font-semibold text-ocean-200">Giá tận biển</span></h1>
+      <p class="mt-5 max-w-xl text-ocean-50/90 sm:text-lg">Bán buôn, bán lẻ hải sản tươi sống và đông lạnh tại Tây Mỗ, Hà Nội. Hàng lấy từ Quảng Ninh, sơ chế và giao tận nhà.</p>
+    </div>
+  </section>
+
+  <!-- Câu chuyện thương hiệu -->
+  <!-- NỘI DUNG MẪU: thay bằng câu chuyện thật của cửa hàng (năm mở cửa, người sáng lập, kỷ niệm...) -->
+  <section class="max-w-7xl mx-auto px-4 py-14 grid gap-10 lg:grid-cols-2 items-center">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Câu chuyện của chúng tôi</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Mang hải sản Quảng Ninh về bữa cơm Hà Nội</h2>
+      <div class="mt-5 space-y-4 text-ocean-900/80 leading-relaxed max-w-prose">
+        <p>Chợ Hải Sản Anh Khoa có hai cơ sở ở 128 Tây Mỗ và 246 Hữu Hưng, phường Tây Mỗ, Hà Nội. Cửa hàng bán cả buôn lẫn lẻ: từ vài lạng ngao cho bữa tối đến hàng chục cân cho nhà hàng, tiệc cưới.</p>
+        <p>Hàng được lấy từ Quảng Ninh. Về tới cửa hàng, tôm, cua, ghẹ, ngao được thả ngay vào bể sục khí để giữ sống. Khách đến chọn tận mắt, cân tận nơi, muốn làm sạch hay hấp chín thì cửa hàng làm miễn phí.</p>
+        <p>Với khách ở xa, cửa hàng đóng thùng xốp kèm đá lạnh và giao tận nhà, miễn phí trong phường Tây Mỗ và bán kính 5 km.</p>
+      </div>
+    </div>
+    <figure class="rounded-3xl overflow-hidden shadow-xl shadow-ocean-900/10">
+      <img src="images/cua-hang/mat-tien.jpg" alt="Khách mua hàng trước cửa Chợ Hải Sản Anh Khoa" class="w-full aspect-[4/3] object-cover">
+      <figcaption class="bg-white px-4 py-3 text-sm text-ocean-900/60">Cơ sở 1 – 128 Tây Mỗ</figcaption>
+    </figure>
+  </section>
+
+  <!-- Tầm nhìn - sứ mệnh - cam kết -->
+  <!-- NỘI DUNG MẪU: chỉnh lại theo định hướng của cửa hàng -->
+  <section class="bg-ocean-50">
+    <div class="max-w-7xl mx-auto px-4 py-14">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Điều chúng tôi theo đuổi</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Tầm nhìn, sứ mệnh và cam kết</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl bg-white p-6">
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-ocean-600">Sứ mệnh</p>
+          <p class="mt-3 text-ocean-900/80">Đưa hải sản tươi, đúng cân, đúng giá tới bữa cơm của các gia đình Hà Nội.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6">
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-ocean-600">Tầm nhìn</p>
+          <p class="mt-3 text-ocean-900/80">Trở thành chợ hải sản quen thuộc của khu vực Tây Mỗ, nơi khách mua một lần và quay lại mỗi tuần.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6">
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-ocean-600">Cam kết</p>
+          <ul class="mt-3 space-y-2 text-ocean-900/80">
+            <li>✓ Hàng sống bán theo cân thực tế</li>
+            <li>✓ Nguồn hàng Quảng Ninh rõ ràng</li>
+            <li>✓ Sơ chế, hấp, đóng thùng miễn phí</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quy trình -->
+  <section class="max-w-7xl mx-auto px-4 py-14">
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Từ biển đến bếp</p>
+    <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Quy trình nhập hàng, bảo quản và giao hàng</h2>
+    <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <li class="rounded-2xl border border-ocean-100 p-5">
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-ocean-600 text-sm font-bold text-white">1</span>
+        <p class="mt-4 font-bold text-ocean-900">Nhập hàng từ Quảng Ninh</p>
+        <p class="mt-2 text-sm text-ocean-900/70">Chọn hàng còn sống, đúng size, chuyển về cửa hàng tại Hà Nội.</p>
+      </li>
+      <li class="rounded-2xl border border-ocean-100 p-5">
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-ocean-600 text-sm font-bold text-white">2</span>
+        <p class="mt-4 font-bold text-ocean-900">Giữ tươi tại cửa hàng</p>
+        <p class="mt-2 text-sm text-ocean-900/70">Hàng sống thả bể sục khí. Cá làm sạch, chả, đồ lẩu bảo quản cấp đông.</p>
+      </li>
+      <li class="rounded-2xl border border-ocean-100 p-5">
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-ocean-600 text-sm font-bold text-white">3</span>
+        <p class="mt-4 font-bold text-ocean-900">Sơ chế theo yêu cầu</p>
+        <p class="mt-2 text-sm text-ocean-900/70">Làm sạch, hấp chín miễn phí. Tặng kèm sả và nước chấm hải sản.</p>
+      </li>
+      <li class="rounded-2xl border border-ocean-100 p-5">
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-ocean-600 text-sm font-bold text-white">4</span>
+        <p class="mt-4 font-bold text-ocean-900">Đóng thùng, giao tận nhà</p>
+        <p class="mt-2 text-sm text-ocean-900/70">Thùng xốp kèm đá giữ lạnh. Miễn phí ship phường Tây Mỗ và bán kính 5 km.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Hình ảnh thực tế -->
+  <section class="max-w-7xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-extrabold tracking-tight text-ocean-900">Hình ảnh thực tế tại cửa hàng</h2>
+    <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <img src="images/ghe-xanh.jpg" alt="Ghẹ xanh sống trong bể" class="w-full aspect-square object-cover rounded-2xl">
+      <img src="images/tom-su.jpg" alt="Tôm sú bơi tại bể" class="w-full aspect-square object-cover rounded-2xl">
+      <img src="images/cua-hang/ngao.jpg" alt="Ngao sống trong bể" class="w-full aspect-square object-cover rounded-2xl">
+      <img src="images/cua-hang/muc-the.jpg" alt="Mực tươi kèm danh thiếp cửa hàng" class="w-full aspect-square object-cover rounded-2xl">
+    </div>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#san-pham" class="rounded-full bg-ocean-600 px-6 py-3 text-sm font-bold text-white hover:bg-ocean-700">Xem bảng giá hôm nay</a>
+      <a href="#lien-he" class="rounded-full border border-ocean-200 px-6 py-3 text-sm font-semibold text-ocean-800 hover:border-ocean-400">Đường đến cửa hàng</a>
+    </div>
+  </section>
+ </div><!-- /view-about -->
+
+ <!-- ================================================= -->
+ <!-- ============ HỖ TRỢ KHÁCH HÀNG (view-support) ==== -->
+ <!-- ================================================= -->
+ <div id="view-support" hidden>
+  <section class="bg-ocean-50 border-b border-ocean-100">
+    <div class="max-w-7xl mx-auto px-4 py-10 sm:py-12">
+      <nav class="text-sm text-ocean-900/60" aria-label="Breadcrumb">
+        <a href="#trang-chu" class="hover:text-ocean-700">Trang chủ</a> <span class="mx-1">/</span> <span class="font-semibold text-ocean-700">Hỗ trợ khách hàng</span>
+      </nav>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Hỗ trợ khách hàng</h1>
+      <p class="mt-3 max-w-2xl text-ocean-900/70">Cách mua hàng, giao hàng và đổi trả. Cần hỏi nhanh, gọi <strong class="tabular text-ocean-800">0985 450 429</strong>.</p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 py-10 grid gap-10 lg:grid-cols-[220px_1fr]">
+    <nav class="min-w-0 lg:sticky lg:self-start" style="top: calc(var(--header-h, 0px) + 1rem)" aria-label="Mục hỗ trợ">
+      <ul class="flex lg:flex-col gap-2 overflow-x-auto text-sm font-semibold">
+        <li><a href="#dat-hang" class="block whitespace-nowrap rounded-xl px-3 py-2 text-ocean-800 hover:bg-ocean-50">Cách mua hàng</a></li>
+        <li><a href="#giao-hang" class="block whitespace-nowrap rounded-xl px-3 py-2 text-ocean-800 hover:bg-ocean-50">Chính sách giao hàng</a></li>
+        <li><a href="#doi-tra" class="block whitespace-nowrap rounded-xl px-3 py-2 text-ocean-800 hover:bg-ocean-50">Đổi trả &amp; hoàn tiền</a></li>
+        <li><a href="#faq" class="block whitespace-nowrap rounded-xl px-3 py-2 text-ocean-800 hover:bg-ocean-50">Câu hỏi thường gặp</a></li>
+      </ul>
+    </nav>
+
+    <div class="min-w-0 space-y-14 max-w-3xl">
+      <section id="dat-hang" class="scroll-mt-32">
+        <h2 class="text-2xl font-extrabold text-ocean-900">Cách mua hàng</h2>
+        <ul class="mt-5 space-y-4 text-ocean-900/80">
+          <li class="flex gap-3"><span class="grid place-items-center w-8 h-8 shrink-0 rounded-full bg-ocean-600 text-white" aria-hidden="true">☎</span><p class="pt-1"><strong class="text-ocean-900">Gọi hotline</strong> <span class="tabular">0985 450 429</span> hoặc <span class="tabular">0784 86 8386</span> để hỏi hàng về hôm nay và giá theo cân.</p></li>
+          <li class="flex gap-3"><span class="grid place-items-center w-8 h-8 shrink-0 rounded-full bg-[#0068FF] text-[10px] font-bold text-white" aria-hidden="true">Zalo</span><p class="pt-1"><strong class="text-ocean-900">Nhắn Zalo</strong> 0985 450 429, gửi ảnh hoặc tên món muốn mua.</p></li>
+          <li class="flex gap-3"><span class="grid place-items-center w-8 h-8 shrink-0 rounded-full bg-coral-500 text-white" aria-hidden="true">⌂</span><p class="pt-1"><strong class="text-ocean-900">Ghé cửa hàng</strong> tại 128 Tây Mỗ hoặc 246 Hữu Hưng, chọn tận mắt, cân tận nơi. <a href="#lien-he" class="font-semibold text-ocean-700 underline underline-offset-2">Xem bản đồ</a></p></li>
+        </ul>
+        <p class="mt-5 rounded-2xl bg-ocean-50 p-4 text-sm text-ocean-800">Bảng giá trên website để bạn tham khảo trước. Giá chính xác theo cân thực tế, cửa hàng báo khi bạn hỏi hàng.</p>
+      </section>
+
+
+      <section id="giao-hang" class="scroll-mt-32">
+        <h2 class="text-2xl font-extrabold text-ocean-900">Chính sách giao hàng</h2>
+        <div class="mt-4 overflow-x-auto rounded-2xl border border-ocean-100">
+          <table class="w-full min-w-[480px] text-left text-sm">
+            <thead class="bg-ocean-50 text-ocean-800"><tr><th class="px-4 py-3 font-bold">Khu vực</th><th class="px-4 py-3 font-bold">Phí ship</th></tr></thead>
+            <tbody class="divide-y divide-ocean-100 text-ocean-900/80">
+              <tr><td class="px-4 py-3">Phường Tây Mỗ</td><td class="px-4 py-3 font-semibold text-ocean-700">Miễn phí</td></tr>
+              <tr><td class="px-4 py-3">Trong bán kính 5 km quanh cửa hàng</td><td class="px-4 py-3 font-semibold text-ocean-700">Miễn phí</td></tr>
+              <!-- NỘI DUNG MẪU: điền phí ship ngoài 5 km nếu có mức cố định -->
+              <tr><td class="px-4 py-3">Ngoài 5 km</td><td class="px-4 py-3">Cửa hàng báo phí khi bạn đặt hàng</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="mt-4 space-y-2 text-ocean-900/80">
+          <li>✓ Hàng được đóng thùng xốp kèm đá lạnh miễn phí.</li>
+          <li>✓ Làm sạch, hấp chín miễn phí nếu bạn yêu cầu khi đặt.</li>
+          <li>✓ Giờ giao được hẹn khi bạn gọi hoặc nhắn Zalo đặt hàng.</li>
+        </ul>
+      </section>
+
+      <!-- NỘI DUNG MẪU: chỉnh điều kiện đổi trả theo cách cửa hàng đang làm -->
+      <section id="doi-tra" class="scroll-mt-32">
+        <h2 class="text-2xl font-extrabold text-ocean-900">Đổi trả &amp; hoàn tiền</h2>
+        <p class="mt-4 text-ocean-900/80">Nếu hải sản không đạt chất lượng, cửa hàng đổi hàng hoặc hoàn tiền phần không đạt.</p>
+        <ul class="mt-4 space-y-2 text-ocean-900/80">
+          <li><strong class="text-ocean-900">Áp dụng khi:</strong> hàng không tươi, hàng chết (với hàng đặt sống), thiếu cân hoặc giao sai món.</li>
+          <li><strong class="text-ocean-900">Cách báo:</strong> kiểm tra ngay khi nhận, gọi hotline hoặc nhắn Zalo kèm ảnh/video.</li>
+          <li><strong class="text-ocean-900">Không áp dụng:</strong> hàng đã chế biến tại nhà hoặc để ngoài tủ lạnh quá lâu sau khi nhận.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="scroll-mt-32">
+        <h2 class="text-2xl font-extrabold text-ocean-900">Câu hỏi thường gặp</h2>
+        <div class="mt-4 divide-y divide-ocean-100 rounded-2xl border border-ocean-100">
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Giá trên website có phải giá cuối cùng không?</summary><p class="mt-2 text-ocean-900/75">Giá theo giá chợ và có thể thay đổi theo ngày. Hàng sống bán theo cân thực tế, cửa hàng báo tổng tiền chính xác khi bạn mua.</p></details>
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Cửa hàng có làm sạch, hấp chín không?</summary><p class="mt-2 text-ocean-900/75">Có. Sơ chế và hấp miễn phí, tặng kèm sả và nước chấm hải sản.</p></details>
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Giao hàng miễn phí đến đâu?</summary><p class="mt-2 text-ocean-900/75">Miễn phí trong phường Tây Mỗ và bán kính 5 km quanh cửa hàng. Xa hơn, cửa hàng báo phí khi bạn đặt hàng qua điện thoại hoặc Zalo.</p></details>
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Hải sản lấy từ đâu?</summary><p class="mt-2 text-ocean-900/75">Hàng được lấy từ Quảng Ninh, về tới cửa hàng là thả bể sục khí hoặc bảo quản cấp đông.</p></details>
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Có bán sỉ cho nhà hàng, quán ăn không?</summary><p class="mt-2 text-ocean-900/75">Có. Cửa hàng bán buôn và bán lẻ, gọi hotline để được báo giá sỉ.</p></details>
+          <details class="group p-4"><summary class="cursor-pointer font-semibold text-ocean-900">Mua về chưa nấu ngay thì bảo quản thế nào?</summary><p class="mt-2 text-ocean-900/75">Xem bảng hướng dẫn ở mục <a href="#bao-quan" class="font-semibold text-ocean-700 underline underline-offset-2">Cách bảo quản</a> trong Góc Bếp.</p></details>
+        </div>
+      </section>
+    </div>
+  </div>
+ </div><!-- /view-support -->
+
+ <!-- ================================================= -->
+ <!-- ============ LIÊN HỆ (view-contact) ============= -->
+ <!-- ================================================= -->
+ <div id="view-contact" hidden>
+  <section class="bg-ocean-50 border-b border-ocean-100">
+    <div class="max-w-7xl mx-auto px-4 py-10 sm:py-12">
+      <nav class="text-sm text-ocean-900/60" aria-label="Breadcrumb">
+        <a href="#trang-chu" class="hover:text-ocean-700">Trang chủ</a> <span class="mx-1">/</span> <span class="font-semibold text-ocean-700">Liên hệ</span>
+      </nav>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">Liên hệ Hải Sản Anh Khoa</h1>
+      <p class="mt-3 max-w-2xl text-ocean-900/70">Ghé cửa hàng, gọi hotline hoặc nhắn Zalo. Cửa hàng trả lời trong giờ bán hàng.</p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 py-10 space-y-10">
+    <!-- Chi nhánh -->
+    <div class="grid gap-5 md:grid-cols-2">
+      <article class="rounded-3xl border border-ocean-100 overflow-hidden">
+        <div id="map1" class="aspect-[16/9] bg-ocean-50" data-map="128 Tây Mỗ, Tây Mỗ, Hà Nội"></div>
+        <div class="p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-ocean-500">Cơ sở 1</p>
+          <p class="mt-1 text-lg font-bold text-ocean-900">128 Tây Mỗ, P. Tây Mỗ, Hà Nội</p>
+          <a class="mt-3 inline-flex items-center gap-2 rounded-full bg-ocean-600 px-4 py-2 text-sm font-bold text-white hover:bg-ocean-700" href="https://www.google.com/maps/search/?api=1&amp;query=128%20T%C3%A2y%20M%E1%BB%97%2C%20H%C3%A0%20N%E1%BB%99i" target="_blank" rel="noopener">Chỉ đường Google Maps</a>
+        </div>
+      </article>
+      <article class="rounded-3xl border border-ocean-100 overflow-hidden">
+        <div id="map2" class="aspect-[16/9] bg-ocean-50" data-map="246 Hữu Hưng, Tây Mỗ, Hà Nội"></div>
+        <div class="p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-ocean-500">Cơ sở 2</p>
+          <p class="mt-1 text-lg font-bold text-ocean-900">246 Hữu Hưng, P. Tây Mỗ, Hà Nội</p>
+          <a class="mt-3 inline-flex items-center gap-2 rounded-full bg-ocean-600 px-4 py-2 text-sm font-bold text-white hover:bg-ocean-700" href="https://www.google.com/maps/search/?api=1&amp;query=246%20H%E1%BB%AFu%20H%C6%B0ng%2C%20H%C3%A0%20N%E1%BB%99i" target="_blank" rel="noopener">Chỉ đường Google Maps</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+      <!-- Hotline & Zalo -->
+      <div class="space-y-4">
+        <div class="rounded-3xl bg-ocean-900 p-6 text-white">
+          <p class="text-sm text-ocean-200">Hotline</p>
+          <p class="mt-1 tabular text-3xl font-extrabold select-all">0985 450 429</p>
+          <p class="tabular text-3xl font-extrabold select-all">0784 86 8386</p>
+        </div>
+        <a href="https://zalo.me/0985450429" target="_blank" rel="noopener" class="zalo-btn flex items-center justify-between rounded-3xl p-6">
+          <span><span class="block text-sm opacity-80">Hỗ trợ trực tuyến</span><span class="block text-2xl font-extrabold">Chat Zalo với cửa hàng</span></span>
+          <span class="text-3xl" aria-hidden="true">→</span>
+        </a>
+        <a href="https://facebook.com/haisananhkhoa" target="_blank" rel="noopener" class="flex items-center justify-between rounded-3xl border border-ocean-100 p-6 hover:border-ocean-300">
+          <span><span class="block text-sm text-ocean-900/60">Facebook</span><span class="block text-lg font-bold text-ocean-900">facebook.com/haisananhkhoa</span></span>
+          <span class="text-2xl text-ocean-600" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Form góp ý -->
+      <form id="feedbackForm" class="rounded-3xl border border-ocean-100 p-6 space-y-4" novalidate>
+        <div>
+          <h2 class="text-xl font-extrabold text-ocean-900">Để lại thông tin hoặc góp ý</h2>
+          <p class="mt-1 text-sm text-ocean-900/60">Nội dung được gửi tới Zalo của cửa hàng.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="fbName" class="text-sm font-semibold text-ocean-900">Họ tên</label>
+            <input id="fbName" type="text" autocomplete="name" class="mt-1 w-full rounded-xl border border-ocean-200 px-3 py-2.5 text-sm focus:border-ocean-400">
+          </div>
+          <div>
+            <label for="fbPhone" class="text-sm font-semibold text-ocean-900">Số điện thoại</label>
+            <input id="fbPhone" type="tel" autocomplete="tel" inputmode="tel" class="mt-1 w-full rounded-xl border border-ocean-200 px-3 py-2.5 text-sm focus:border-ocean-400">
+          </div>
+        </div>
+        <div>
+          <label for="fbType" class="text-sm font-semibold text-ocean-900">Chủ đề</label>
+          <select id="fbType" class="mt-1 w-full rounded-xl border border-ocean-200 px-3 py-2.5 text-sm bg-white focus:border-ocean-400">
+            <option>Hỏi hàng / báo giá</option>
+            <option>Hỏi giá sỉ</option>
+            <option>Góp ý dịch vụ</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div>
+          <label for="fbMsg" class="text-sm font-semibold text-ocean-900">Nội dung <span class="text-coral-600">*</span></label>
+          <textarea id="fbMsg" rows="4" class="mt-1 w-full rounded-xl border border-ocean-200 px-3 py-2.5 text-sm focus:border-ocean-400"></textarea>
+          <p id="fbError" class="mt-1 text-xs text-coral-600" hidden>Bạn nhập nội dung giúp cửa hàng nhé.</p>
+        </div>
+        <button type="submit" class="zalo-btn w-full rounded-full py-3 font-bold">Gửi qua Zalo</button>
+        <a id="fbFallback" href="#" target="_blank" rel="noopener" class="block text-center text-sm font-semibold text-[#0068FF] underline underline-offset-2" hidden>Trình duyệt chặn tab mới? Bấm vào đây để mở Zalo</a>
+      </form>
+    </div>
+  </div>
+ </div><!-- /view-contact -->
+
+
+
+ <!-- ================================================= -->
+ <!-- ============ GÓC BẾP (view-kitchen) ============= -->
+ <!-- ================================================= -->
+ <div id="view-kitchen" hidden>
+
+  <!-- Tiêu đề trang -->
+  <section class="relative overflow-hidden bg-ocean-50 border-b border-ocean-100">
+    <div class="max-w-7xl mx-auto px-4 py-10 sm:py-14 grid gap-8 lg:grid-cols-[1.2fr_1fr] items-center">
+      <div>
+        <nav class="text-sm text-ocean-900/60" aria-label="Breadcrumb">
+          <a href="#trang-chu" class="hover:text-ocean-700">Trang chủ</a> <span class="mx-1">/</span> <span class="font-semibold text-ocean-700">Góc Bếp</span>
+        </nav>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-ocean-900">
+          Góc Bếp <span class="font-script italic font-semibold text-ocean-600">nhà Anh Khoa</span>
+        </h1>
+        <p class="mt-4 max-w-xl text-ocean-900/70 sm:text-lg">
+          Công thức hải sản nấu ở nhà, mẹo chọn hàng tươi và cách bảo quản đúng. Nguyên liệu có sẵn tại cửa hàng, sơ chế miễn phí.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2 text-sm">
+          <a href="#cong-thuc" class="rounded-full bg-ocean-600 px-5 py-2.5 font-bold text-white hover:bg-ocean-700">Xem công thức</a>
+          <a href="#meo-chon" class="rounded-full border border-ocean-200 bg-white px-5 py-2.5 font-semibold text-ocean-800 hover:border-ocean-400">Mẹo chọn hải sản</a>
+          <a href="#bao-quan" class="rounded-full border border-ocean-200 bg-white px-5 py-2.5 font-semibold text-ocean-800 hover:border-ocean-400">Cách bảo quản</a>
+        </div>
+      </div>
+
+      <!-- Món nổi bật -->
+      <a href="#cua-hap-bia-sa" class="group block rounded-3xl bg-white border border-ocean-100 overflow-hidden hover:shadow-xl hover:shadow-ocean-900/10 transition">
+        <div class="relative aspect-[16/9] bg-gradient-to-br from-ocean-100 to-ocean-200 grid place-items-center overflow-hidden"><span data-dish="cua" class="contents"></span><img src="images/goc-bep/cua-hap-bia-sa.jpg" alt="Cua hấp bia sả" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()"></div>
+        <div class="p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-coral-600">Món của tuần</p>
+          <p class="mt-1 text-xl font-bold text-ocean-900 group-hover:text-ocean-600">Cua hấp bia sả</p>
+          <p class="mt-1 text-sm text-ocean-900/60">25 phút · Dễ · 3–4 người. Xếp cua ngửa yếm là bí quyết giữ gạch.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Danh sách công thức -->
+  <section id="cong-thuc" class="max-w-7xl mx-auto px-4 py-14 scroll-mt-32">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Công thức</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Hôm nay nấu món gì?</h2>
+      </div>
+      <p id="recipeCount" class="text-sm text-ocean-900/60 tabular"></p>
+    </div>
+
+    <div id="recipeFilters" class="mt-6 space-y-3" role="group" aria-label="Lọc công thức"></div>
+
+    <div id="recipeGrid" class="mt-8 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </section>
+
+  <!-- Mẹo chọn hải sản tươi -->
+  <section id="meo-chon" class="bg-ocean-900 text-white scroll-mt-32">
+    <div class="max-w-7xl mx-auto px-4 py-14">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-300">Mẹo đi chợ</p>
+      <h2 class="mt-2 text-3xl font-extrabold tracking-tight">Chọn hải sản tươi trong 10 giây</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+          <p class="text-lg font-bold">Cua - Ghẹ</p>
+          <ul class="mt-3 space-y-2 text-sm text-ocean-100/85">
+            <li>• Cầm thấy nặng tay so với kích cỡ</li>
+            <li>• Bóp yếm thấy chắc, không lún</li>
+            <li>• Càng và chân còn cử động khỏe</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+          <p class="text-lg font-bold">Tôm</p>
+          <ul class="mt-3 space-y-2 text-sm text-ocean-100/85">
+            <li>• Vỏ bóng, trong, không có đốm đen</li>
+            <li>• Đầu dính chặt vào thân</li>
+            <li>• Ấn vào thân thấy thịt đàn hồi</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+          <p class="text-lg font-bold">Mực</p>
+          <ul class="mt-3 space-y-2 text-sm text-ocean-100/85">
+            <li>• Thân trong, da óng ánh còn đốm màu</li>
+            <li>• Mắt trong, xanh, không đục</li>
+            <li>• Đầu và thân dính chặt, không nhớt</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+          <p class="text-lg font-bold">Ngao - Sò</p>
+          <ul class="mt-3 space-y-2 text-sm text-ocean-100/85">
+            <li>• Vỏ khép chặt, chạm vào thì khép lại</li>
+            <li>• Gõ hai con vào nhau nghe tiếng chắc</li>
+            <li>• Loại bỏ con há miệng, có mùi lạ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bảo quản -->
+  <section id="bao-quan" class="max-w-7xl mx-auto px-4 py-14 scroll-mt-32">
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-ocean-500">Bảo quản</p>
+    <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ocean-900">Mua về chưa nấu ngay thì cất thế nào?</h2>
+    <div class="mt-6 overflow-x-auto rounded-2xl border border-ocean-100">
+      <table class="w-full min-w-[640px] text-left text-sm">
+        <thead class="bg-ocean-50 text-ocean-800">
+          <tr>
+            <th class="px-4 py-3 font-bold">Loại</th>
+            <th class="px-4 py-3 font-bold">Ngăn mát (0–4°C)</th>
+            <th class="px-4 py-3 font-bold">Ngăn đông (−18°C)</th>
+            <th class="px-4 py-3 font-bold">Lưu ý</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ocean-100 text-ocean-900/80">
+          <tr><td class="px-4 py-3 font-semibold text-ocean-900">Cua, ghẹ sống</td><td class="px-4 py-3 tabular">Tối đa 1 ngày</td><td class="px-4 py-3">Nên hấp chín rồi mới cấp đông</td><td class="px-4 py-3">Phủ khăn ẩm, không ngâm nước ngọt</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-ocean-900">Tôm</td><td class="px-4 py-3 tabular">1–2 ngày</td><td class="px-4 py-3 tabular">2–3 tháng</td><td class="px-4 py-3">Chia túi nhỏ theo bữa, hút hết không khí</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-ocean-900">Mực</td><td class="px-4 py-3 tabular">1–2 ngày</td><td class="px-4 py-3 tabular">2–3 tháng</td><td class="px-4 py-3">Làm sạch, thấm khô trước khi cất</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-ocean-900">Ngao, sò, ốc</td><td class="px-4 py-3 tabular">1–2 ngày</td><td class="px-4 py-3">Luộc lấy thịt rồi mới cấp đông</td><td class="px-4 py-3">Để trong rổ thoáng, không buộc túi kín</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-ocean-900/50">Thời gian mang tính tham khảo cho hải sản mua tươi trong ngày. Rã đông trong ngăn mát, không rã đông lại lần hai.</p>
+  </section>
+
+  <!-- Kêu gọi -->
+  <section class="max-w-7xl mx-auto px-4 pb-16">
+    <div class="rounded-3xl bg-gradient-to-r from-ocean-600 to-ocean-500 px-6 py-10 sm:px-10 text-white flex flex-wrap items-center justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="text-2xl font-extrabold">Ngại sơ chế? Để nhà Anh Khoa làm giúp.</p>
+        <p class="mt-2 text-ocean-50/90">Làm sạch, hấp chín, tặng kèm sả và nước chấm hải sản. Gọi đặt trước, đến nơi chỉ việc lấy.</p>
+      </div>
+      <div class="text-right">
+        <p class="text-sm text-ocean-100">Hotline</p>
+        <p class="tabular text-3xl font-extrabold select-all">0985 450 429</p>
+      </div>
+    </div>
+  </section>
+ </div><!-- /view-kitchen -->
+</main>
+
+<!-- ============ MODAL CÔNG THỨC ============ -->
+<div id="recipeModal" class="fixed inset-0 z-50 bg-ocean-950/60 backdrop-blur-sm px-4 py-6 sm:py-10 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="rmTitle" hidden>
+  <div class="relative mx-auto max-w-3xl rounded-3xl bg-white shadow-2xl overflow-hidden">
+    <button id="rmClose" type="button" class="absolute right-3 top-3 z-10 grid place-items-center w-10 h-10 rounded-full bg-white/90 text-ocean-900 hover:bg-white shadow" aria-label="Đóng">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+    </button>
+    <div id="rmArt" class="relative overflow-hidden aspect-[16/7] bg-gradient-to-br from-ocean-100 to-ocean-200 grid place-items-center"></div>
+    <div class="p-6 sm:p-8">
+      <p id="rmCat" class="text-xs font-bold uppercase tracking-[0.14em] text-ocean-500"></p>
+      <h2 id="rmTitle" class="mt-1 text-2xl sm:text-3xl font-extrabold text-ocean-900"></h2>
+      <dl id="rmMeta" class="mt-4 flex flex-wrap gap-2 text-sm"></dl>
+      <div class="mt-8 grid gap-8 md:grid-cols-[1fr_1.5fr]">
+        <div>
+          <a id="rmVideo" href="#" target="_blank" rel="noopener" class="mb-5 flex items-center gap-2 rounded-xl bg-coral-500 px-4 py-3 text-sm font-bold text-white hover:bg-coral-600" hidden>▶ Xem video hướng dẫn</a>
+          <h3 class="font-bold text-ocean-900">Nguyên liệu cần chuẩn bị</h3>
+          <ul id="rmIng" class="mt-3 space-y-2 text-sm"></ul>
+          <div class="mt-6 rounded-2xl bg-ocean-50 p-4">
+            <p class="text-sm font-bold text-ocean-900">Nguyên liệu có tại Anh Khoa</p>
+            <ul id="rmBuyList" class="mt-3 space-y-2"></ul>
+            <p class="mt-3 text-xs text-ocean-900/60">Sơ chế, hấp miễn phí khi mua tại cửa hàng. Hỏi hàng: <strong class="tabular">0985 450 429</strong></p>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-ocean-900">Cách làm</h3>
+          <ol id="rmSteps" class="mt-3 space-y-4"></ol>
+          <div id="rmTip" class="mt-6 rounded-2xl bg-ocean-50 p-4 text-sm text-ocean-800"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer id="chan-trang" class="bg-ocean-950 text-ocean-100">
+  <div class="max-w-7xl mx-auto px-4 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <div class="flex items-center gap-3">
+        <img src="images/logo.jpg" alt="Logo Hải Sản Anh Khoa" class="w-16 h-16 rounded-full object-cover bg-white">
+        <p class="text-xl font-extrabold text-white">Hải Sản Anh Khoa</p>
+      </div>
+      <p class="mt-3 text-sm text-ocean-100/70 max-w-xs">Hải sản tươi sống, sơ chế sạch sẽ, giao nhanh tận nhà cho gia đình Hà Nội.</p>
+      <p class="mt-5 text-sm">Hotline</p>
+      <p class="tabular text-2xl font-extrabold text-white select-all">0985 450 429</p>
+      <p class="tabular text-2xl font-extrabold text-white select-all">0784 86 8386</p>
+      <p class="mt-5 text-sm">Theo dõi cửa hàng</p>
+      <div class="mt-2 flex flex-wrap gap-2 text-sm font-semibold">
+        <a href="https://facebook.com/haisananhkhoa" target="_blank" rel="noopener" class="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20">Facebook</a>
+        <!-- Thêm link kênh YouTube / TikTok của cửa hàng rồi bỏ dấu chú thích 2 dòng dưới:
+        <a href="https://www.youtube.com/@TEN-KENH" target="_blank" rel="noopener" class="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20">YouTube</a>
+        <a href="https://www.tiktok.com/@TEN-KENH" target="_blank" rel="noopener" class="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20">TikTok</a>
+        -->
+        <a href="https://zalo.me/0985450429" target="_blank" rel="noopener" class="rounded-full bg-[#0068FF] px-4 py-2 text-white hover:bg-[#0052CC]">Zalo</a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-white">Hệ thống cửa hàng</h3>
+      <ul class="mt-4 space-y-4 text-sm">
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 shrink-0 text-ocean-300 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <span><strong class="text-white">Cơ sở 1:</strong> 128 Tây Mỗ, P. Tây Mỗ, Hà Nội</span>
+        </li>
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 shrink-0 text-ocean-300 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <span><strong class="text-white">Cơ sở 2:</strong> 246 Hữu Hưng, P. Tây Mỗ, Hà Nội</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-white">Hỗ trợ khách hàng</h3>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li><a href="#dat-hang" class="hover:text-white">Cách mua hàng</a></li>
+        <li><a href="#giao-hang" class="hover:text-white">Chính sách giao hàng</a></li>
+        <li><a href="#doi-tra" class="hover:text-white">Chính sách đổi trả, hoàn tiền</a></li>
+        <li><a href="#faq" class="hover:text-white">Câu hỏi thường gặp</a></li>
+        <li><a href="#ve-chung-toi" class="hover:text-white">Về chúng tôi</a></li>
+        <li><a href="#lien-he" class="hover:text-white">Liên hệ &amp; bản đồ</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-white">Khuyến mãi kèm theo</h3>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li class="flex gap-2"><span class="text-ocean-300">✓</span> Miễn phí sơ chế + ship tận nhà</li>
+        <li class="flex gap-2"><span class="text-ocean-300">✓</span> Miễn phí sả + nước chấm hải sản</li>
+        <li class="flex gap-2"><span class="text-ocean-300">✓</span> Miễn phí hấp</li>
+        <li class="flex gap-2"><span class="text-ocean-300">✓</span> Miễn phí đóng thùng xốp + đá</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex flex-wrap justify-between gap-2 text-xs text-ocean-100/60">
+      <p>© 2026 Chợ Hải Sản Anh Khoa. Bán buôn – bán lẻ hải sản tươi sống, đông lạnh.</p>
+      <p>Giá trên website mang tính tham khảo, thay đổi theo giá chợ mỗi ngày.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ NÚT LIÊN HỆ NỔI ============ --><!-- ============ NÚT LIÊN HỆ NỔI ============ -->
+<div class="hidden md:flex fixed right-4 z-40 flex-col gap-3" style="bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px))">
+  <a href="https://zalo.me/0985450429" target="_blank" rel="noopener" class="zalo-btn grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-full text-xs sm:text-sm font-extrabold" aria-label="Chat Zalo với cửa hàng">Zalo</a>
+  <a href="tel:0985450429" class="grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-coral-500 text-white shadow-lg hover:bg-coral-600" aria-label="Gọi hotline 0985 450 429">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<!-- ============ THANH LIÊN HỆ DƯỚI ĐÁY (điện thoại) ============ -->
+<div class="md:hidden fixed inset-x-0 bottom-0 z-40 bg-white border-t border-ocean-100 shadow-[0_-4px_16px_rgba(10,53,82,.08)]" style="padding-bottom: env(safe-area-inset-bottom, 0px)">
+  <div class="grid grid-cols-3 text-xs font-bold">
+    <a href="tel:0985450429" class="flex flex-col items-center gap-1 py-2.5 text-coral-600">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke-linejoin="round"/></svg>Gọi ngay
+    </a>
+    <a href="https://zalo.me/0985450429" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 py-2.5 text-[#0068FF]">
+      <span class="grid place-items-center w-6 h-6 rounded-md bg-[#0068FF] text-[9px] font-extrabold text-white" aria-hidden="true">Zalo</span>Chat Zalo
+    </a>
+    <a href="#lien-he" class="flex flex-col items-center gap-1 py-2.5 text-ocean-800">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Chỉ đường
+    </a>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast pointer-events-none fixed left-1/2 bottom-6 z-[70] max-w-[90vw] text-center -translate-x-1/2 translate-y-4 opacity-0 rounded-full bg-ocean-900 px-5 py-3 text-sm font-semibold text-white shadow-xl" role="status" aria-live="polite"></div>
+
+<script>
+  /* ================= BẢNG GIÁ SẢN PHẨM =================
+     Sửa giá: đổi số ở cột price (đơn vị đồng). priceMax: giá cao nhất nếu giá dao động theo size.
+     img: ảnh trong thư mục images (để trống nếu chưa có ảnh). featured: hiện ở "Sản phẩm nổi bật" trang chủ. */
+  const PRODUCT_CATS = [
+    { id: 'tom',     name: 'Tôm bơi' },
+    { id: 'cua',     name: 'Ghẹ - Cua' },
+    { id: 'ngao',    name: 'Ngao - Sò - Ốc' },
+    { id: 'hau',     name: 'Hàu' },
+    { id: 'muc',     name: 'Mực - Tuộc' },
+    { id: 'ca-song', name: 'Cá tươi sống' },
+    { id: 'ca-dong', name: 'Cá làm sạch cấp đông' },
+    { id: 'lau',     name: 'Đồ thả lẩu' },
+    { id: 'cha',     name: 'Các loại chả' },
+    { id: 'non',     name: 'Nõn tôm - ghẹ' },
+    { id: 'kho',     name: 'Hải sản khô' },
+    { id: 'giavi',   name: 'Gia vị & nước chấm' }
+  ];
+  const P = (id, cat, name, price, unit, extra = {}) => ({ id, cat, name, price, unit, ...extra });
+  const PRODUCTS = [
+    // Tôm bơi
+    P('tom-hum',   'tom', 'Tôm hùm', 1200000, 'kg', { note: '4–5 lạng/con', img: 'images/hero.jpg' }),
+    P('tom-the',   'tom', 'Tôm thẻ to', 320000, 'kg'),
+    P('tom-cang',  'tom', 'Tôm càng xanh', 330000, 'kg', { priceMax: 360000, note: 'Giá theo size' }),
+    P('be-be',     'tom', 'Bề bề', 350000, 'kg', { img: 'images/cua-hang/be-be.jpg' }),
+    P('tom-su-28', 'tom', 'Tôm sú bơi 28–30', 400000, 'kg', { note: 'Size 28–30 con/kg', img: 'images/tom-su.jpg' }),
+    P('tom-su-18', 'tom', 'Tôm sú bơi 18–20', 480000, 'kg', { note: 'Size 18–20 con/kg', img: 'images/tom-su.jpg', featured: 'Còn bơi' }),
+    // Ghẹ - Cua
+    P('ghe-nho',   'cua', 'Ghẹ nhỡ', 420000, 'kg', { note: '6–8 con/kg', img: 'images/ghe-xanh.jpg' }),
+    P('ghe-to',    'cua', 'Ghẹ xanh to', 520000, 'kg', { note: '4–5 con/kg', img: 'images/ghe-xanh.jpg', featured: 'Ghẹ to' }),
+    P('cua-thit',  'cua', 'Cua thịt', 430000, 'kg', { note: '4–5 lạng/con', img: 'images/cua-bien.jpg' }),
+    P('cua-gach',  'cua', 'Cua gạch', 590000, 'kg', { note: '4–5 lạng/con', img: 'images/cua-bien.jpg', featured: 'Bán chạy' }),
+    // Ngao - Sò - Ốc
+    P('ngao-hoa',   'ngao', 'Ngao hoa to', 160000, 'kg'),
+    P('ngao-trang', 'ngao', 'Ngao trắng', 35000, 'kg'),
+    P('ngao-mo',    'ngao', 'Ngao mỡ to', 110000, 'kg'),
+    P('ngao-2-cui', 'ngao', 'Ngao hai cùi', 150000, 'kg'),
+    P('so-san',     'ngao', 'Sò sần', 150000, 'kg'),
+    P('so-thung',   'ngao', 'Sò thưng to', 190000, 'kg'),
+    P('oc-huong',   'ngao', 'Ốc hương to', 340000, 'kg'),
+    P('so-gao',     'ngao', 'Sò gạo', 90000, 'kg'),
+    // Hàu
+    P('hau',          'hau', 'Hàu', 45000, 'kg'),
+    P('ruot-hau-nho', 'hau', 'Ruột hàu gói nhỏ', 70000, 'gói'),
+    P('ruot-hau-to',  'hau', 'Ruột hàu gói to', 130000, 'gói'),
+    // Mực - Tuộc
+    P('muc-nho',       'muc', 'Mực tươi size nhỡ', 300000, 'kg', { note: '6–7 con/kg', img: 'images/muc-ong.jpg' }),
+    P('muc-to',        'muc', 'Mực tươi size to', 350000, 'kg', { note: '2–4 con/kg', img: 'images/muc-ong.jpg', featured: 'Mực tươi' }),
+    P('muc-mai',       'muc', 'Mực mai làm sạch', 290000, 'kg'),
+    P('muc-nhay',      'muc', 'Mực nháy', 350000, 'kg'),
+    P('rau-muc',       'muc', 'Râu mực', 240000, 'kg'),
+    P('tuoc-to',       'muc', 'Tuộc tươi giòn to', 240000, 'kg'),
+    P('tuoc-nho',      'muc', 'Tuộc nhỡ cấp sống', 110000, 'gói'),
+    P('muc-hap-san',   'muc', 'Mực hấp sẵn to', 120000, 'gói'),
+    P('muc-trung-nhay','muc', 'Mực trứng nháy', 170000, 'gói'),
+    P('muc-trung',     'muc', 'Mực trứng tươi', 280000, 'kg'),
+    // Cá tươi sống
+    P('ca-tam',  'ca-song', 'Cá tầm Sapa', 160000, 'kg'),
+    P('ca-chep', 'ca-song', 'Cá chép giòn', 160000, 'kg'),
+    P('ca-lang', 'ca-song', 'Cá lăng', 130000, 'kg'),
+    P('ca-mu',   'ca-song', 'Cá mú Quảng Ninh', 270000, 'kg'),
+    P('ca-chim', 'ca-song', 'Cá chim', 230000, 'kg'),
+    P('ca-dia',  'ca-song', 'Cá dìa ngộp', 210000, 'kg'),
+    P('ca-hoi-song', 'ca-song', 'Cá hồi Sapa nguyên con bơi', 270000, 'kg'),
+    // Cá làm sạch cấp đông
+    P('ca-hoi-khuc', 'ca-dong', 'Cá hồi cắt khúc', 240000, 'kg'),
+    P('ca-kim',      'ca-dong', 'Cá kìm', 90000, 'kg'),
+    P('ca-thu-con',  'ca-dong', 'Cá thu con', 150000, 'kg', { note: 'Con 1–2 kg' }),
+    P('ca-nuc-nang', 'ca-dong', 'Cá nục 1 nắng', 100000, 'kg'),
+    P('ca-moi',      'ca-dong', 'Cá mối rút xương', 120000, 'kg'),
+    P('ca-thu-tuoi', 'ca-dong', 'Cá thu tươi', 280000, 'kg'),
+    P('ca-thu-nuong','ca-dong', 'Cá thu nướng', 300000, 'kg'),
+    P('ca-nuc-to',   'ca-dong', 'Cá nục to', 85000, 'kg'),
+    // Đồ thả lẩu
+    P('bo-my',        'lau', 'Bò Mỹ', 240000, 'kg'),
+    P('dau-hu-pho-mai','lau', 'Đậu hũ phô mai', 105000, 'gói'),
+    P('vien-lau',     'lau', 'Viên thả lẩu', 45000, 'gói', { note: 'Cá viên / tôm viên / bò viên' }),
+    P('vien-thap-cam','lau', 'Viên thả lẩu thập cẩm', 70000, 'gói'),
+    P('nuoc-lau-thai','lau', 'Nước lẩu Thái hải sản', 35000, 'phần'),
+    // Các loại chả
+    P('cha-basa',      'cha', 'Chả cá basa', 100000, 'kg'),
+    P('cha-muc',       'cha', 'Chả mực giã tay', 220000, 'kg', { priceMax: 400000, note: 'Giá theo loại' }),
+    P('cha-nha-trang', 'cha', 'Chả cá Nha Trang', 100000, 'kg'),
+    P('cha-be',        'cha', 'Chả bề', 160000, 'kg'),
+    // Nõn tôm - ghẹ
+    P('thit-ghe',     'non', 'Thịt ghẹ xịn', 300000, 'kg'),
+    P('non-tom-kho',  'non', 'Nõn tôm khô', 95000, 'lạng'),
+    P('non-be',       'non', 'Nõn bề', 280000, 'kg'),
+    P('tom-non-tuoi', 'non', 'Tôm nõn tươi to', 350000, 'kg'),
+    // Hải sản khô  (các dòng 'giavi' là gia vị & nước chấm)
+    P('muc-kho',         'kho', 'Mực khô VIP', 145000, 'lạng'),
+    P('ca-bo',           'kho', 'Cá bò', 25000, 'lạng'),
+    P('non-tom-bien',    'kho', 'Nõn tôm biển khô', 95000, 'lạng'),
+    P('mam-cot-db',      'giavi', 'Nước mắm cốt đặc biệt', 150000, 'chai', { note: 'Chai 1 lít' }),
+    P('mam-cot',         'giavi', 'Nước mắm cốt', 100000, 'chai', { note: 'Chai 1 lít' }),
+    P('mu-tat',          'giavi', 'Mù tạt cay', 20000, 'lọ'),
+    P('sot-trung-muoi',  'giavi', 'Sốt trứng muối', 45000, 'phần'),
+    P('sot-pho-mai',     'giavi', 'Sốt phô mai', 45000, 'phần'),
+    P('sot-me',          'giavi', 'Sốt me chua ngọt', 30000, 'phần'),
+    P('nuoc-cham-chai',  'giavi', 'Nước chấm thêm (chai)', 50000, 'chai', { note: 'Chai 300 ml' }),
+    P('nuoc-cham-lo',    'giavi', 'Nước chấm thêm (lọ nhỏ)', 5000, 'lọ')
+  ];
+  const PRODUCT_BY_ID = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+  const CAT_NAME = Object.fromEntries(PRODUCT_CATS.map(c => [c.id, c.name]));
+
+  const vnd = n => n.toLocaleString('vi-VN') + 'đ';                 // 1420000 -> "1.420.000đ"
+  const fmtQty = q => String(q).replace('.', ',');                    // 1.5 -> "1,5"
+  const qtyLabel = (q, unit) => unit === 'kg' ? fmtQty(q) + 'kg' : fmtQty(q) + ' ' + unit;
+  const priceLabel = p => (p.priceMax ? vnd(p.price) + ' – ' + vnd(p.priceMax) : vnd(p.price)) + '/' + p.unit;
+  const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+  const thumb = (p, cls) => p.img
+    ? `<img src="${p.img}" alt="${p.name}" class="${cls} object-cover">`
+    : `<span class="${cls} grid place-items-center bg-ocean-100 text-ocean-700 font-extrabold text-lg" aria-hidden="true">${p.name.charAt(0)}</span>`;
+
+
+  /* ===== Nhóm lớn (trang Sản phẩm) ===== */
+  const PRODUCT_GROUPS = [
+    { id: 'song',  name: 'Hải sản tươi sống',          cats: ['tom', 'cua', 'ngao', 'hau', 'muc', 'ca-song'] },
+    { id: 'dong',  name: 'Đông lạnh & chế biến sẵn',   cats: ['ca-dong', 'cha', 'non', 'lau'] },
+    { id: 'kho',   name: 'Hải sản khô & đặc sản',      cats: ['kho'] },
+    { id: 'giavi', name: 'Gia vị & đồ ăn kèm',          cats: ['giavi'] }
+  ];
+  const GROUP_OF_CAT = Object.fromEntries(PRODUCT_GROUPS.flatMap(g => g.cats.map(c => [c, g.id])));
+
+  /* Nguồn gốc: hàng biển lấy từ Quảng Ninh; món có tên vùng miền thì ghi theo tên. Sửa trực tiếp ở đây. */
+  const ORIGIN_OVERRIDE = { 'ca-tam': 'Sa Pa', 'ca-hoi-song': 'Sa Pa', 'ca-mu': 'Quảng Ninh', 'bo-my': 'Mỹ', 'cha-nha-trang': 'Nha Trang' };
+  const originOf = p => ORIGIN_OVERRIDE[p.id] || (['tom', 'cua', 'ngao', 'hau', 'muc'].includes(p.cat) ? 'Quảng Ninh' : null);
+  function packOf(p) {
+    const g = GROUP_OF_CAT[p.cat];
+    if (g === 'song' && p.unit === 'kg') return 'Bán theo cân thực tế. Giao hàng sống, hoặc làm sạch / hấp chín miễn phí theo yêu cầu. Đóng thùng xốp kèm đá.';
+    if (g === 'dong' && p.unit === 'kg') return 'Hàng làm sạch, cấp đông, bán theo cân. Đóng túi và giữ lạnh bằng đá khi giao.';
+    return 'Đóng sẵn theo ' + p.unit + (p.note ? ' (' + p.note.toLowerCase() + ')' : '') + '.';
+  }
+
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg, ms = 1800) {
+    toast.textContent = msg;
+    toast.classList.remove('opacity-0', 'translate-y-4');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-4'), ms);
+  }
+  const phoneOk = v => /^0\d{9}$/.test(v.replace(/[\s.]/g, ''));
+
+  /* Mở Zalo với nội dung soạn sẵn (dùng chung cho đơn hàng và form góp ý) */
+  const ZALO_PHONE = '0985450429';
+  function openZalo(message, fallbackEl) {
+    const url = 'https://zalo.me/' + ZALO_PHONE + '?text=' + encodeURIComponent(message);
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(message).catch(() => {});
+    const win = window.open(url, '_blank');
+    fallbackEl.href = url;
+    if (win) { win.opener = null; fallbackEl.hidden = true; } else fallbackEl.hidden = false;
+    showToast('Đã sao chép nội dung. Nếu Zalo chưa điền sẵn, hãy dán (Ctrl+V) vào ô chat.', 4000);
+  }
+
+  /* ===== Trang chủ: sản phẩm nổi bật ===== */
+  const productLink = p => '#sp-' + p.id;
+  document.getElementById('featuredGrid').innerHTML = PRODUCTS.filter(p => p.featured).map(p => `
+    <article class="group flex flex-col rounded-3xl border border-ocean-100 bg-white overflow-hidden hover:shadow-xl hover:shadow-ocean-900/10 transition">
+      <a href="${productLink(p)}" class="relative block aspect-[4/3] bg-ocean-50 overflow-hidden">
+        ${thumb(p, 'absolute inset-0 w-full h-full group-hover:scale-105 transition duration-500')}
+        <span class="absolute left-3 top-3 rounded-full bg-coral-500 px-2.5 py-1 text-[11px] font-bold text-white">${p.featured}</span>
+      </a>
+      <div class="flex flex-1 flex-col gap-3 p-5">
+        <div>
+          <p class="text-xs font-semibold text-ocean-500">${CAT_NAME[p.cat]}</p>
+          <h3 class="mt-1 text-lg font-bold text-ocean-900"><a href="${productLink(p)}" class="hover:text-ocean-600">${p.name}</a></h3>
+          ${p.note ? `<p class="mt-1 text-sm text-ocean-900/60">${p.note}</p>` : ''}
+        </div>
+        <div class="mt-auto flex items-baseline gap-2">
+          <span class="tabular text-xl font-extrabold text-ocean-700">${vnd(p.price)}</span>
+          <span class="text-sm text-ocean-900/50">/${p.unit}</span>
+        </div>
+        <a href="${productLink(p)}" class="block w-full rounded-full bg-ocean-600 py-2.5 text-center text-sm font-bold text-white hover:bg-ocean-700 transition">Xem chi tiết</a>
+      </div>
+    </article>`).join('');
+
+  /* ===== Trang chủ: danh mục sản phẩm ===== */
+  const HOME_CATS = [
+    { cat: 'tom', label: 'Tôm các loại', img: 'images/tom-su.jpg' },
+    { cat: 'cua', label: 'Cua - Ghẹ', img: 'images/ghe-xanh.jpg' },
+    { cat: 'muc', label: 'Mực - Tuộc', img: 'images/muc-ong.jpg' },
+    { cat: 'ngao', label: 'Ngao - Sò - Ốc', img: 'images/cua-hang/ngao.jpg' },
+    { cat: 'ca-song', label: 'Cá tươi sống', img: '' },
+    { group: 'dong', label: 'Đông lạnh & đồ lẩu', img: '' },
+    { group: 'kho', label: 'Hải sản khô', img: '' },
+    { group: 'giavi', label: 'Gia vị & nước chấm', img: '' }
+  ];
+  document.getElementById('homeCats').innerHTML = HOME_CATS.map(c => {
+    const n = PRODUCTS.filter(p => c.cat ? p.cat === c.cat : GROUP_OF_CAT[p.cat] === c.group).length;
+    const pic = c.img
+      ? `<img src="${c.img}" alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">`
+      : `<span class="absolute inset-0 bg-gradient-to-br from-ocean-500 to-ocean-800"></span>`;
+    return `<a href="#san-pham" data-goto-cat="${c.cat || ''}" data-goto-group="${c.group || ''}" class="group relative block overflow-hidden rounded-2xl aspect-[4/3] sm:aspect-[5/4]">
+      ${pic}<span class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-ocean-950/20 to-transparent"></span>
+      <span class="absolute left-3 right-3 bottom-3 text-white"><span class="block font-bold leading-tight">${c.label}</span><span class="text-xs text-ocean-100 tabular">${n} mặt hàng</span></span>
+    </a>`;
+  }).join('');
+
+  /* ===== Trang Sản phẩm: lọc theo nhóm lớn → nhóm nhỏ + tìm kiếm ===== */
+  let prodGroup = 'all', prodCat = 'all';
+  const searchInput = document.getElementById('search');
+  const groupFilters = document.getElementById('prodGroups');
+  const prodFilters = document.getElementById('prodFilters');
+  function renderProducts() {
+    groupFilters.innerHTML = [{ id: 'all', name: 'Tất cả' }, ...PRODUCT_GROUPS]
+      .map(g => `<button type="button" data-group="${g.id}" class="chip whitespace-nowrap ${g.id === prodGroup ? 'is-active' : ''}">${g.name}</button>`).join('');
+    const subCats = prodGroup === 'all' ? [] : PRODUCT_GROUPS.find(g => g.id === prodGroup).cats;
+    prodFilters.hidden = subCats.length < 2;
+    prodFilters.innerHTML = subCats.length < 2 ? '' : [{ id: 'all', name: 'Tất cả nhóm này' }, ...subCats.map(id => ({ id, name: CAT_NAME[id] }))]
+      .map(c => `<button type="button" data-cat="${c.id}" class="sub-chip whitespace-nowrap ${c.id === prodCat ? 'is-active' : ''}">${c.name}</button>`).join('');
+
+    const q = norm(searchInput.value.trim());
+    let total = 0;
+    const cats = PRODUCT_CATS.filter(c => (prodGroup === 'all' || GROUP_OF_CAT[c.id] === prodGroup) && (prodCat === 'all' || c.id === prodCat));
+    document.getElementById('prodList').innerHTML = cats.map(c => {
+      const items = PRODUCTS.filter(p => p.cat === c.id && (!q || norm(p.name + ' ' + (p.note || '') + ' ' + c.name).includes(q)));
+      total += items.length;
+      if (!items.length) return '';
+      return `<section>
+        <h2 class="flex items-baseline gap-2 text-xl font-extrabold text-ocean-900">${c.name} <span class="text-sm font-semibold text-ocean-900/40 tabular">${items.length}</span></h2>
+        <ul class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          ${items.map(p => `<li class="flex items-center gap-3 rounded-2xl border border-ocean-100 bg-white p-3 hover:border-ocean-300 transition">
+            <a href="${productLink(p)}" class="shrink-0">${thumb(p, 'w-16 h-16 rounded-xl')}</a>
+            <a href="${productLink(p)}" class="flex-1 min-w-0">
+              <p class="font-bold text-ocean-900 leading-snug hover:text-ocean-600">${p.name}</p>
+              ${p.note ? `<p class="text-xs text-ocean-900/55">${p.note}</p>` : ''}
+              <p class="mt-1 tabular text-sm font-extrabold text-ocean-700">${priceLabel(p)}</p>
+            </a>
+            <a href="${productLink(p)}" class="shrink-0 grid place-items-center w-9 h-9 rounded-full bg-ocean-50 text-ocean-700 text-xl font-bold hover:bg-ocean-100" aria-label="Xem ${p.name}">›</a>
+          </li>`).join('')}
+        </ul>
+      </section>`;
+    }).join('');
+    document.getElementById('prodEmpty').hidden = total > 0;
+    document.getElementById('prodCount').textContent = total + ' mặt hàng';
+    const qRaw = searchInput.value.trim();
+    document.getElementById('prodQuery').hidden = !qRaw;
+    document.getElementById('prodQueryText').textContent = qRaw;
+  }
+  groupFilters.addEventListener('click', e => {
+    const b = e.target.closest('[data-group]'); if (!b) return;
+    prodGroup = b.dataset.group; prodCat = 'all'; renderProducts();
+  });
+  prodFilters.addEventListener('click', e => {
+    const b = e.target.closest('[data-cat]'); if (!b) return;
+    prodCat = b.dataset.cat; renderProducts();
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-goto-cat],[data-goto-group]'); if (!a) return;
+    const cat = a.dataset.gotoCat, group = a.dataset.gotoGroup;
+    prodGroup = group || GROUP_OF_CAT[cat] || 'all';
+    prodCat = cat || 'all';
+    searchInput.value = '';
+    renderProducts();
+    if (location.hash === '#san-pham') window.scrollTo(0, 0);
+  });
+  document.getElementById('prodQueryClear').addEventListener('click', () => { searchInput.value = ''; renderProducts(); });
+  searchInput.addEventListener('input', renderProducts);
+  document.getElementById('searchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    prodGroup = 'all'; prodCat = 'all';
+    renderProducts();
+    if (location.hash === '#san-pham') window.scrollTo({ top: 0, behavior: 'smooth' });
+    else location.hash = 'san-pham';
+  });
+  renderProducts();
+
+  const syncBodyLock = () => document.body.classList.toggle('modal-open', !document.getElementById('recipeModal').hidden);
+
+  /* ================= GÓC BẾP: CÔNG THỨC =================
+     cat: nguyên liệu chính · type: kiểu món · occ: dịp · buy: mã sản phẩm có tại cửa hàng (hiện thành link) · video: link YouTube (nếu có) */
+  const CATS = { cua: 'Cua - Ghẹ', tom: 'Tôm', muc: 'Mực', ngao: 'Ngao - Sò - Ốc', hau: 'Hàu', lau: 'Lẩu hải sản' };
+  const TYPES = { hap: 'Món hấp', xao: 'Món xào - rang - chiên', nuong: 'Món nướng', lau: 'Món lẩu', chao: 'Cháo - canh' };
+  const OCCS = { be: 'Món ngon cho bé', nhau: 'Món nhậu', giadinh: 'Bữa cơm gia đình' };
+  const RECIPES = [
+    { id: 'cua-hap-bia-sa', cat: 'cua', type: 'hap', occ: ['nhau', 'giadinh'], name: 'Cua hấp bia sả', time: 25, level: 'Dễ', serve: '3–4 người',
+      buy: ['cua-gach'], video: '', desc: 'Hấp lửa lớn, gạch không chảy, thịt vẫn ngọt.',
+      ing: ['1 kg cua gạch hoặc cua thịt (2–3 con loại 4–5 lạng)', '1 lon bia', '5 cây sả đập dập, cắt khúc', '1 củ gừng nhỏ thái lát', 'Muối, tiêu, chanh để chấm'],
+      steps: ['Để cua vào ngăn đá 15 phút cho cua ngủ, rồi dùng bàn chải cọ sạch yếm và càng.', 'Lót sả và gừng dưới đáy nồi, đổ bia vào.', 'Xếp cua ngửa yếm lên trên để gạch không chảy ra ngoài.', 'Đậy nắp, hấp lửa lớn 15–20 phút đến khi cua đỏ đều.', 'Pha muối tiêu chanh, bày cua ra đĩa, dùng nóng.'],
+      tip: 'Mua cua tại Anh Khoa được hấp chín miễn phí, mang về chỉ việc ăn.' },
+    { id: 'ghe-rang-me', cat: 'cua', type: 'xao', occ: ['nhau'], name: 'Ghẹ rang me', time: 35, level: 'Vừa', serve: '3 người',
+      buy: ['ghe-nho', 'sot-me'], video: '', desc: 'Sốt me chua ngọt bám vỏ, mút tay không dừng.',
+      ing: ['1 kg ghẹ nhỡ (6–8 con)', '100 g me chín (hoặc 1 phần sốt me chua ngọt)', '3 muỗng canh đường', '2 muỗng canh nước mắm', 'Tỏi, hành tím băm, ớt'],
+      steps: ['Ghẹ rửa sạch, tách mai, bỏ yếm và phổi, chặt đôi.', 'Ngâm me với nước ấm, dầm lấy khoảng 1 bát nước cốt.', 'Chiên sơ ghẹ trong dầu nóng đến khi đỏ vỏ, vớt ra.', 'Phi thơm tỏi và hành, đổ nước me, đường, nước mắm vào, đun đến khi sánh.', 'Cho ghẹ vào đảo đều 3–5 phút cho sốt bám vỏ, rắc ớt rồi tắt bếp.'],
+      tip: 'Giữ lại gạch trong mai, cho vào sốt ở bước cuối để sốt béo và thơm hơn.' },
+    { id: 'tom-su-rang-muoi', cat: 'tom', type: 'xao', occ: ['giadinh', 'nhau'], name: 'Tôm sú rang muối', time: 20, level: 'Dễ', serve: '3 người',
+      buy: ['tom-su-28'], video: '', desc: 'Vỏ giòn, thấm vị, bóc là ăn không ngừng.',
+      ing: ['500 g tôm sú', '1 muỗng cà phê muối hạt', '2 muỗng canh bột bắp', 'Tỏi, ớt, lá chanh thái chỉ'],
+      steps: ['Tôm cắt râu, cắt chủy, rửa sạch, để thật ráo.', 'Lăn tôm qua một lớp bột bắp mỏng.', 'Chiên tôm trong dầu nóng đến khi vỏ giòn, vớt ra để ráo dầu.', 'Phi tỏi và ớt, cho tôm vào cùng muối, đảo nhanh tay.', 'Rắc lá chanh, đảo thêm 30 giây rồi bày ra đĩa.'],
+      tip: 'Tôm phải thật khô trước khi lăn bột thì vỏ mới giòn, không bị bắn dầu.' },
+    { id: 'tom-hap-nuoc-dua', cat: 'tom', type: 'hap', occ: ['be', 'giadinh'], name: 'Tôm hấp nước dừa', time: 15, level: 'Dễ', serve: '2–3 người',
+      buy: ['tom-su-28'], video: '', desc: 'Ngọt thanh tự nhiên, trẻ con rất thích.',
+      ing: ['500 g tôm sú', '1 quả dừa xiêm lấy nước', '2 cây sả', 'Muối tiêu chanh'],
+      steps: ['Tôm rửa sạch, cắt râu.', 'Đổ nước dừa và sả đập dập vào nồi, đun sôi.', 'Cho tôm vào, đậy nắp hấp 5–7 phút đến khi tôm đỏ và cong mình.', 'Vớt tôm ra đĩa, chấm muối tiêu chanh.'],
+      tip: 'Tôm chín tới là vớt ngay, để lâu thịt sẽ bở và mất vị ngọt.' },
+    { id: 'chao-tom-bi-do', cat: 'tom', type: 'chao', occ: ['be'], name: 'Cháo tôm bí đỏ cho bé', time: 40, level: 'Dễ', serve: '1–2 bé',
+      buy: ['tom-the'], video: '', desc: 'Ngọt tự nhiên từ tôm và bí, mềm dễ ăn.',
+      ing: ['100 g tôm thẻ', '100 g bí đỏ', '3 muỗng canh gạo (hoặc cháo trắng nấu sẵn)', '1 thìa dầu ăn dặm hoặc dầu ô liu'],
+      steps: ['Nấu gạo với nước thành cháo nhừ.', 'Bí đỏ gọt vỏ, hấp chín rồi nghiền mịn.', 'Tôm bóc vỏ, bỏ chỉ lưng, băm nhỏ, xào sơ với chút dầu cho chín.', 'Cho bí đỏ và tôm vào nồi cháo, khuấy đều, đun thêm 3–5 phút. Để nguội bớt, thêm dầu ăn dặm trước khi cho bé ăn.'],
+      tip: 'Nếu bé mới ăn tôm lần đầu, cho ăn lượng nhỏ trước để theo dõi.' },
+    { id: 'muc-hap-gung-hanh', cat: 'muc', type: 'hap', occ: ['nhau'], name: 'Mực hấp gừng hành', time: 15, level: 'Dễ', serve: '2–3 người',
+      buy: ['muc-to'], video: '', desc: 'Chấm mắm gừng, giữ nguyên độ giòn của mực.',
+      ing: ['500 g mực tươi', '1 củ gừng thái sợi', '3 cây hành lá', 'Nước mắm gừng để chấm'],
+      steps: ['Mực bỏ túi mực và nang trong, rửa sạch, để nguyên con.', 'Lót nửa phần gừng và hành dưới đĩa hấp, đặt mực lên, rải phần gừng còn lại.', 'Hấp cách thủy lửa lớn 5–7 phút.', 'Cắt khoanh, dùng nóng với nước mắm gừng.'],
+      tip: 'Không hấp mực quá 7 phút, mực sẽ co lại và dai.' },
+    { id: 'muc-chien-nuoc-mam', cat: 'muc', type: 'xao', occ: ['giadinh'], name: 'Mực chiên nước mắm', time: 20, level: 'Vừa', serve: '3 người',
+      buy: ['muc-nho', 'mam-cot'], video: '', desc: 'Mặn ngọt đậm đà, ăn với cơm trắng rất đưa.',
+      ing: ['500 g mực tươi', '2 muỗng canh nước mắm cốt', '1 muỗng canh đường', 'Tỏi băm, ớt'],
+      steps: ['Mực làm sạch, cắt khoanh hoặc khứa vảy rồng, thấm thật khô.', 'Chiên mực lửa lớn trong dầu nóng khoảng 2 phút, vớt ra.', 'Phi tỏi, cho nước mắm và đường vào, đun đến khi sánh lại.', 'Trút mực vào đảo nhanh cho áo đều nước sốt, rắc ớt.'],
+      tip: 'Chiên mực từng mẻ nhỏ để chảo luôn nóng, mực không bị ra nước.' },
+    { id: 'ngao-hap-sa', cat: 'ngao', type: 'hap', occ: ['nhau'], name: 'Ngao hấp sả ớt', time: 15, level: 'Dễ', serve: '2–3 người',
+      buy: ['ngao-trang'], video: '', desc: 'Nước ngao ngọt, thơm sả, húp cạn bát.',
+      ing: ['1 kg ngao', '4 cây sả', '2 quả ớt', 'Vài lá chanh, 1 nhánh gừng'],
+      steps: ['Ngâm ngao trong nước muối loãng có vài lát ớt khoảng 1–2 tiếng cho nhả cát.', 'Cho sả, gừng, ớt vào nồi cùng chút nước, đun sôi.', 'Thả ngao vào, đậy nắp 3–5 phút đến khi ngao há miệng.', 'Thả lá chanh, đảo đều rồi tắt bếp. Bỏ những con không há miệng.'],
+      tip: 'Đừng đun quá lâu sau khi ngao đã há miệng, thịt ngao sẽ teo và dai.' },
+    { id: 'oc-huong-xao-bo-toi', cat: 'ngao', type: 'xao', occ: ['nhau'], name: 'Ốc hương xào bơ tỏi', time: 25, level: 'Vừa', serve: '3 người',
+      buy: ['oc-huong'], video: '', desc: 'Thơm bơ, cay nhẹ, khều từng con không chán.',
+      ing: ['500 g ốc hương', '50 g bơ lạt', '1 củ tỏi băm', 'Sả băm, ớt, lá chanh', 'Muối, đường, tiêu'],
+      steps: ['Ngâm ốc nước vo gạo có vài lát ớt khoảng 1 tiếng, chà sạch vỏ.', 'Luộc sơ ốc 3–5 phút, vớt ra để ráo.', 'Đun chảy bơ, phi thơm tỏi và sả.', 'Cho ốc vào đảo đều, nêm muối, đường, tiêu, thêm ớt và lá chanh, đảo 2–3 phút cho thấm.'],
+      tip: 'Luộc sơ vừa đủ để ốc không rút sâu vào vỏ, khó khều.' },
+    { id: 'hau-nuong-mo-hanh', cat: 'hau', type: 'nuong', occ: ['nhau'], name: 'Hàu nướng mỡ hành', time: 20, level: 'Dễ', serve: '3–4 người',
+      buy: ['hau'], video: '', desc: 'Hàu mọng nước, thơm mỡ hành và đậu phộng.',
+      ing: ['1 kg hàu', '3 cây hành lá thái nhỏ', '2 muỗng canh mỡ hoặc dầu ăn', 'Đậu phộng rang giã dập', 'Nước mắm, đường, tiêu'],
+      steps: ['Rửa sạch vỏ hàu, tách bỏ nắp trên, giữ phần thịt trên vỏ dưới.', 'Phi mỡ hoặc dầu nóng, cho hành lá vào khuấy nhanh, nêm chút nước mắm và đường.', 'Xếp hàu lên vỉ nướng than hoặc khay lò, nướng 3–5 phút đến khi hàu se lại.', 'Rưới mỡ hành lên từng con, nướng thêm 1 phút, rắc đậu phộng và tiêu.'],
+      tip: 'Nướng vừa tới để hàu còn mọng, nướng lâu thịt hàu teo nhỏ.' },
+    { id: 'lau-hai-san', cat: 'lau', type: 'lau', occ: ['giadinh', 'nhau'], name: 'Lẩu hải sản chua cay', time: 45, level: 'Vừa', serve: '4–5 người',
+      buy: ['nuoc-lau-thai', 'tom-the', 'muc-nho', 'ngao-trang', 'vien-thap-cam'], video: '', desc: 'Nồi lẩu cuối tuần cho cả nhà quây quần.',
+      ing: ['Tôm, mực, ngao mỗi loại khoảng 300–500 g', '1 phần nước lẩu Thái hải sản (hoặc 2 lít nước dùng xương)', 'Viên thả lẩu, chả các loại', 'Cà chua, dứa, sả, me', 'Rau muống, nấm, bún'],
+      steps: ['Đun sôi nước lẩu Thái, hoặc hầm xương lấy nước dùng.', 'Phi sả, cà chua, dứa cho thơm rồi đổ vào nồi nước dùng.', 'Nêm me, nước mắm, đường, sa tế theo khẩu vị chua cay.', 'Bày hải sản, viên thả lẩu và rau ra đĩa, nhúng từng lượt khi ăn.'],
+      tip: 'Cửa hàng có sẵn đồ thả lẩu và các loại chả, gọi trước để được chuẩn bị đủ set.' }
+  ];
+  const RECIPE_BY_ID = Object.fromEntries(RECIPES.map(r => [r.id, r]));
+
+  /* Hình minh họa món ăn (SVG) */
+  function dishSVG(cat) {
+    const plate = '<ellipse cx="120" cy="92" rx="100" ry="40" fill="#0D4A6F" opacity=".18"/><ellipse cx="120" cy="86" rx="98" ry="38" fill="#fff"/><ellipse cx="120" cy="84" rx="80" ry="29" fill="#F2F9FD"/>';
+    const herb = '<path d="M52 82c10-14 30-14 40-4-12 2-26 8-40 4z" fill="#58B86B"/><circle cx="182" cy="78" r="9" fill="#FFD84D"/><circle cx="182" cy="78" r="6" fill="#FFF0A8"/>';
+    const steam = '<g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"><path d="M100 30c-6-8 6-12 0-20"/><path d="M120 34c-6-8 6-12 0-20"/><path d="M140 30c-6-8 6-12 0-20"/></g>';
+    const shells = '<g><path d="M88 88a16 12 0 0 1 32 0z" fill="#E9DCC6"/><path d="M112 80a16 12 0 0 1 32 0z" fill="#DCCBAE"/><path d="M130 92a16 12 0 0 1 32 0z" fill="#E9DCC6"/><path d="M100 96a16 12 0 0 1 32 0z" fill="#F3E8D4"/></g><g fill="#E4583B"><circle cx="118" cy="70" r="3"/><circle cx="142" cy="76" r="3"/></g>';
+    const food = {
+      cua: '<g stroke="#C8452C" stroke-width="5" stroke-linecap="round" fill="none"><path d="M92 86 72 98"/><path d="M96 92 80 104"/><path d="M148 86 168 98"/><path d="M144 92 160 104"/><path d="M100 70 86 52"/><path d="M140 70 154 52"/></g><path d="M78 46c-8 4-6 16 4 18l8-8-2-12z" fill="#E4583B"/><path d="M162 46c8 4 6 16-4 18l-8-8 2-12z" fill="#E4583B"/><ellipse cx="120" cy="80" rx="34" ry="22" fill="#E4583B"/><ellipse cx="120" cy="76" rx="24" ry="13" fill="#F07B5E"/>',
+      tom: '<g><path d="M80 90c4-22 36-28 50-12 6 6 6 14 0 18-10-8-24-8-34 2z" fill="#FF8A5C"/><path d="M110 82c4-22 36-28 50-12 6 6 6 14 0 18-10-8-24-8-34 2z" fill="#FF9B70"/><path d="M96 74c4-22 36-28 50-12 6 6 6 14 0 18-10-8-24-8-34 2z" fill="#FF7A45"/></g>',
+      muc: '<g fill="none" stroke="#F0CDBB" stroke-width="9"><ellipse cx="96" cy="82" rx="14" ry="8"/><ellipse cx="124" cy="78" rx="14" ry="8"/><ellipse cx="150" cy="86" rx="14" ry="8"/><ellipse cx="112" cy="94" rx="14" ry="8"/></g><path d="M86 70c4-6 10-6 12 0" stroke="#E4583B" stroke-width="3" fill="none"/>',
+      ngao: shells, hau: shells,
+      lau: '<ellipse cx="120" cy="84" rx="70" ry="26" fill="#6B7C8A"/><ellipse cx="120" cy="78" rx="62" ry="20" fill="#E4583B"/><ellipse cx="120" cy="78" rx="54" ry="15" fill="#F07B5E"/><path d="M92 76c3-10 18-12 24-4" fill="#FF9B70"/><ellipse cx="140" cy="78" rx="8" ry="4" fill="none" stroke="#F3D9CC" stroke-width="4"/><circle cx="108" cy="82" r="4" fill="#58B86B"/><circle cx="128" cy="72" r="3" fill="#58B86B"/>'
+    }[cat] || shells;
+    return '<svg viewBox="0 0 240 130" class="w-4/5 max-w-sm" aria-hidden="true">' + steam + plate + herb + food + '</svg>';
+  }
+  const dishImg = r => `<img src="images/goc-bep/${r.id}.jpg" alt="${r.name}" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">`;
+  document.querySelectorAll('[data-dish]').forEach(el => el.innerHTML = dishSVG(el.dataset.dish));
+
+  const recipeCard = r => `
+    <a href="#${r.id}" class="group flex flex-col rounded-3xl border border-ocean-100 bg-white overflow-hidden hover:shadow-xl hover:shadow-ocean-900/10 transition">
+      <div class="relative aspect-[4/3] bg-gradient-to-br from-ocean-50 to-ocean-100 grid place-items-center overflow-hidden">${dishSVG(r.cat)}${dishImg(r)}</div>
+      <div class="flex flex-1 flex-col gap-2 p-5">
+        <p class="text-xs font-semibold text-ocean-500">${TYPES[r.type]} · ${CATS[r.cat]}</p>
+        <h3 class="text-lg font-bold text-ocean-900 group-hover:text-ocean-600">${r.name}</h3>
+        <p class="text-sm text-ocean-900/60">${r.desc}</p>
+        <div class="mt-auto pt-3 flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="rounded-full bg-ocean-50 px-2.5 py-1 text-ocean-700 tabular">${r.time} phút</span>
+          <span class="rounded-full bg-ocean-50 px-2.5 py-1 text-ocean-700">${r.level}</span>
+          ${r.occ.map(o => `<span class="rounded-full bg-coral-500/10 px-2.5 py-1 text-coral-600">${OCCS[o]}</span>`).join('')}
+        </div>
+      </div>
+    </a>`;
+
+  /* Gợi ý món ngon mỗi ngày (trang chủ) */
+  const HOME_RECIPES = ['cua-hap-bia-sa', 'tom-su-rang-muoi', 'lau-hai-san', 'chao-tom-bi-do'];
+  document.getElementById('homeRecipes').innerHTML = HOME_RECIPES.map(id => recipeCard(RECIPE_BY_ID[id])).join('');
+
+  /* Lưới công thức + 3 bộ lọc */
+  const rf = { cat: 'all', type: 'all', occ: 'all' };
+  const FILTER_ROWS = [
+    { key: 'cat',  label: 'Nguyên liệu', map: CATS },
+    { key: 'type', label: 'Kiểu món',    map: TYPES },
+    { key: 'occ',  label: 'Dịp',         map: OCCS }
+  ];
+  function renderRecipes() {
+    document.getElementById('recipeFilters').innerHTML = FILTER_ROWS.map(row => `
+      <div class="flex flex-wrap items-center gap-2" data-row="${row.key}">
+        <span class="w-24 shrink-0 text-xs font-bold uppercase tracking-[0.12em] text-ocean-900/50">${row.label}</span>
+        ${[['all', 'Tất cả'], ...Object.entries(row.map)].map(([k, v]) =>
+          `<button type="button" data-val="${k}" class="chip ${rf[row.key] === k ? 'is-active' : ''}">${v}</button>`).join('')}
+      </div>`).join('');
+    const list = RECIPES.filter(r => (rf.cat === 'all' || r.cat === rf.cat) && (rf.type === 'all' || r.type === rf.type) && (rf.occ === 'all' || r.occ.includes(rf.occ)));
+    document.getElementById('recipeGrid').innerHTML = list.map(recipeCard).join('') ||
+      '<p class="col-span-full rounded-2xl bg-ocean-50 p-6 text-center text-ocean-800">Chưa có công thức khớp bộ lọc. Thử bỏ bớt một lựa chọn nhé.</p>';
+    document.getElementById('recipeCount').textContent = list.length + ' công thức';
+  }
+  document.getElementById('recipeFilters').addEventListener('click', e => {
+    const b = e.target.closest('[data-val]'); if (!b) return;
+    rf[b.closest('[data-row]').dataset.row] = b.dataset.val;
+    renderRecipes();
+  });
+  renderRecipes();
+
+  /* Chi tiết công thức (cửa sổ) */
+  const modal = document.getElementById('recipeModal');
+  let activeRecipe = null;
+  function openRecipe(r) {
+    activeRecipe = r;
+    document.getElementById('rmArt').innerHTML = dishSVG(r.cat) + dishImg(r);
+    document.getElementById('rmCat').textContent = TYPES[r.type] + ' · ' + r.occ.map(o => OCCS[o]).join(', ');
+    document.getElementById('rmTitle').textContent = r.name;
+    document.getElementById('rmMeta').innerHTML =
+      [['Thời gian', r.time + ' phút'], ['Độ khó', r.level], ['Khẩu phần', r.serve]]
+        .map(([k, v]) => `<div class="rounded-full bg-ocean-50 px-3 py-1.5"><dt class="inline text-ocean-900/60">${k}:</dt> <dd class="inline font-semibold text-ocean-800">${v}</dd></div>`).join('');
+    const video = document.getElementById('rmVideo');
+    video.hidden = !r.video; if (r.video) video.href = r.video;
+    document.getElementById('rmIng').innerHTML = r.ing.map(x => `<li class="flex gap-2 text-ocean-900/80"><span class="text-ocean-400">•</span>${x}</li>`).join('');
+    document.getElementById('rmBuyList').innerHTML = r.buy.map(id => {
+      const p = PRODUCT_BY_ID[id];
+      return `<li><a href="#sp-${p.id}" class="flex items-center gap-3 rounded-xl border border-ocean-100 bg-white p-2.5 hover:border-ocean-300">
+        ${thumb(p, 'w-10 h-10 shrink-0 rounded-lg')}
+        <span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-ocean-900 leading-snug">${p.name}</span>
+        <span class="block text-xs text-ocean-900/60 tabular">${priceLabel(p)}</span></span>
+        <span class="text-ocean-500" aria-hidden="true">›</span>
+      </a></li>`;
+    }).join('');
+    document.getElementById('rmSteps').innerHTML = r.steps.map((s, i) => `
+      <li class="flex gap-3">
+        <span class="grid place-items-center w-7 h-7 shrink-0 rounded-full bg-ocean-600 text-xs font-bold text-white tabular">${i + 1}</span>
+        <p class="text-sm leading-relaxed text-ocean-900/80 pt-1">${s}</p></li>`).join('');
+    document.getElementById('rmTip').innerHTML = '<strong>Mẹo nhà Anh Khoa:</strong> ' + r.tip;
+    modal.hidden = false; syncBodyLock();
+    document.getElementById('rmClose').focus();
+  }
+  function closeRecipe() {
+    modal.hidden = true; syncBodyLock();
+    activeRecipe = null;
+    if (RECIPE_BY_ID[location.hash.slice(1)]) {
+      try { history.replaceState(null, '', '#goc-bep'); } catch (e) {}
+    }
+  }
+  document.getElementById('rmClose').addEventListener('click', closeRecipe);
+  modal.addEventListener('click', e => { if (e.target === modal) closeRecipe(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeRecipe(); });
+
+  /* ================= CHI TIẾT SẢN PHẨM ================= */
+  function renderProductDetail(p) {
+    const origin = originOf(p);
+    const recipes = RECIPES.filter(r => r.buy.includes(p.id));
+    const more = recipes.length < 3 ? RECIPES.filter(r => !recipes.includes(r) && r.cat === p.cat).slice(0, 3 - recipes.length) : [];
+    const suggest = [...recipes, ...more];
+    const related = PRODUCTS.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
+    document.getElementById('productDetail').innerHTML = `
+      <nav class="text-sm text-ocean-900/60" aria-label="Breadcrumb">
+        <a href="#trang-chu" class="hover:text-ocean-700">Trang chủ</a> <span class="mx-1">/</span>
+        <a href="#san-pham" data-goto-cat="${p.cat}" class="hover:text-ocean-700">${CAT_NAME[p.cat]}</a> <span class="mx-1">/</span>
+        <span class="font-semibold text-ocean-700">${p.name}</span>
+      </nav>
+      <div class="mt-6 grid gap-8 lg:grid-cols-2">
+        <div class="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ocean-50">
+          ${p.img ? `<img src="${p.img}" alt="${p.name}" class="absolute inset-0 w-full h-full object-cover">`
+                  : `<div class="absolute inset-0 grid place-items-center bg-gradient-to-br from-ocean-100 to-ocean-200"><span class="text-7xl font-extrabold text-ocean-600/40">${p.name.charAt(0)}</span><span class="absolute bottom-4 text-sm text-ocean-800/70">Ảnh sản phẩm đang cập nhật</span></div>`}
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ocean-500">${CAT_NAME[p.cat]}</p>
+          <h1 class="mt-1 text-3xl sm:text-4xl font-extrabold tracking-tight text-ocean-900">${p.name}</h1>
+          <p class="mt-4 tabular text-3xl font-extrabold text-ocean-700">${priceLabel(p)}</p>
+          ${p.priceMax ? '<p class="mt-1 text-sm text-ocean-900/60">Giá theo size, cửa hàng báo chính xác khi xác nhận đơn.</p>' : ''}
+          <dl class="mt-6 divide-y divide-ocean-100 rounded-2xl border border-ocean-100 text-sm">
+            ${p.note ? `<div class="flex gap-4 p-4"><dt class="w-32 shrink-0 text-ocean-900/60">Kích cỡ</dt><dd class="font-semibold text-ocean-900">${p.note}</dd></div>` : ''}
+            <div class="flex gap-4 p-4"><dt class="w-32 shrink-0 text-ocean-900/60">Nguồn gốc</dt><dd class="font-semibold text-ocean-900">${origin || 'Hỏi cửa hàng để biết thêm'}</dd></div>
+            <div class="flex gap-4 p-4"><dt class="w-32 shrink-0 text-ocean-900/60">Quy cách</dt><dd class="text-ocean-900/80">${packOf(p)}</dd></div>
+            <div class="flex gap-4 p-4"><dt class="w-32 shrink-0 text-ocean-900/60">Miễn phí</dt><dd class="text-ocean-900/80">Sơ chế, hấp, sả + nước chấm, thùng xốp + đá. Ship P. Tây Mỗ &amp; bán kính 5 km.</dd></div>
+          </dl>
+          <div class="mt-6 rounded-2xl bg-ocean-50 p-4">
+            <p class="text-sm font-bold text-ocean-900">Hỏi hàng về hôm nay</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a href="https://zalo.me/0985450429" target="_blank" rel="noopener" class="zalo-btn flex-1 min-w-[9rem] rounded-full py-3 text-center text-sm font-bold">Nhắn Zalo</a>
+              <a href="tel:0985450429" class="flex-1 min-w-[9rem] rounded-full bg-coral-500 py-3 text-center text-sm font-bold text-white hover:bg-coral-600">Gọi 0985 450 429</a>
+            </div>
+            <a href="#lien-he" class="mt-3 inline-block text-sm font-semibold text-ocean-700 underline underline-offset-2">Chỉ đường tới cửa hàng</a>
+          </div>
+          <a href="#bao-quan" class="mt-4 inline-block text-sm font-semibold text-ocean-600 underline underline-offset-2">Cách bảo quản khi chưa nấu ngay</a>
+        </div>
+      </div>
+
+      <section class="mt-14">
+        <h2 class="text-2xl font-extrabold tracking-tight text-ocean-900">Gợi ý món ngon từ nguyên liệu này</h2>
+        ${suggest.length
+          ? `<div class="mt-6 grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-5">${suggest.map(recipeCard).join('')}</div>`
+          : `<p class="mt-4 rounded-2xl bg-ocean-50 p-5 text-ocean-800">Công thức cho món này đang được cập nhật. Xem thêm các món khác trong <a href="#goc-bep" class="font-semibold underline underline-offset-2">Góc Bếp</a>, hoặc hỏi cửa hàng cách chế biến ngon nhất.</p>`}
+      </section>
+
+      ${related.length ? `<section class="mt-14">
+        <h2 class="text-2xl font-extrabold tracking-tight text-ocean-900">Cùng nhóm ${CAT_NAME[p.cat]}</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          ${related.map(x => `<li class="flex items-center gap-3 rounded-2xl border border-ocean-100 p-3">
+            <a href="#sp-${x.id}" class="shrink-0">${thumb(x, 'w-14 h-14 rounded-xl')}</a>
+            <a href="#sp-${x.id}" class="flex-1 min-w-0"><span class="block font-bold text-ocean-900 leading-snug">${x.name}</span><span class="block text-sm font-bold text-ocean-700 tabular">${priceLabel(x)}</span></a>
+          </li>`).join('')}
+        </ul>
+      </section>` : ''}`;
+    document.title = p.name + ' – Hải Sản Anh Khoa';
+  }
+
+  /* ================= LIÊN HỆ ================= */
+  // Bản đồ Google Maps: chỉ nhúng khi trang mở trực tiếp (không nằm trong khung xem trước)
+  if (window.self === window.top) {
+    document.querySelectorAll('[data-map]').forEach(el => {
+      el.innerHTML = `<iframe title="Bản đồ ${el.dataset.map}" src="https://www.google.com/maps?q=${encodeURIComponent(el.dataset.map)}&output=embed" class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+    });
+  } else {
+    document.querySelectorAll('[data-map]').forEach(el => {
+      el.innerHTML = `<div class="w-full h-full grid place-items-center text-center p-6 bg-gradient-to-br from-ocean-100 to-ocean-200"><p class="text-ocean-800"><span class="block text-lg font-bold">${el.dataset.map}</span><span class="text-sm">Bấm "Chỉ đường Google Maps" bên dưới để mở bản đồ</span></p></div>`;
+    });
+  }
+  document.getElementById('feedbackForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    if (!v('fbMsg')) { document.getElementById('fbError').hidden = false; document.getElementById('fbMsg').focus(); return; }
+    document.getElementById('fbError').hidden = true;
+    const msg = `Chào Hải Sản Anh Khoa, tôi gửi ${v('fbType').toLowerCase()}:\n${v('fbMsg')}` +
+      (v('fbName') ? `\nTên: ${v('fbName')}` : '') + (v('fbPhone') ? `\nSĐT: ${v('fbPhone')}` : '');
+    openZalo(msg, document.getElementById('fbFallback'));
+  });
+
+  /* ================= MENU ĐIỆN THOẠI ================= */
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function setMenu(open) {
+    mobileMenu.classList.toggle('is-open', open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+  }
+  function closeMenu() { setMenu(false); }
+  menuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('is-open')));
+  mobileMenu.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  document.addEventListener('click', e => { if (!e.target.closest('header')) closeMenu(); });
+
+  /* ================= ĐIỀU HƯỚNG GIỮA CÁC TRANG ================= */
+  const VIEWS = ['home', 'products', 'product', 'kitchen', 'about', 'support', 'contact'];
+  const KITCHEN_SECTIONS = ['goc-bep', 'cong-thuc', 'meo-chon', 'bao-quan'];
+  const SUPPORT_SECTIONS = ['ho-tro', 'dat-hang', 'thanh-toan', 'giao-hang', 'doi-tra', 'faq'];
+  const PAGE_TOKENS = ['trang-chu', 'san-pham', 'goc-bep', 've-chung-toi', 'ho-tro', 'lien-he'];
+  const NAV_OF = { home: 'trang-chu', products: 'san-pham', product: 'san-pham', kitchen: 'goc-bep', about: 've-chung-toi', support: 'ho-tro', contact: 'lien-he' };
+  const BASE_TITLE = document.title;
+  function route() {
+    const h = location.hash.slice(1);
+    const recipe = RECIPE_BY_ID[h];
+    const product = h.startsWith('sp-') ? PRODUCT_BY_ID[h.slice(3)] : null;
+    let view = 'home';
+    if (recipe || KITCHEN_SECTIONS.includes(h)) view = 'kitchen';
+    else if (product) view = 'product';
+    else if (h === 'san-pham') view = 'products';
+    else if (h === 've-chung-toi') view = 'about';
+    else if (SUPPORT_SECTIONS.includes(h)) view = 'support';
+    else if (h === 'lien-he') view = 'contact';
+    VIEWS.forEach(v => document.getElementById('view-' + v).hidden = v !== view);
+    document.querySelectorAll('.nav-link, .m-nav-link').forEach(a => a.classList.toggle('is-active', a.dataset.nav === NAV_OF[view]));
+    closeMenu();
+    document.title = BASE_TITLE;
+    if (product) renderProductDetail(product);
+    if (recipe) { openRecipe(recipe); return; }
+    if (!modal.hidden) closeRecipe();
+    const target = h && !PAGE_TOKENS.includes(h) && document.getElementById(h);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    else window.scrollTo(0, 0);
+  }
+  const setHeaderH = () => document.documentElement.style.setProperty('--header-h', document.querySelector('header').offsetHeight + 'px');
+  setHeaderH(); window.addEventListener('resize', setHeaderH);
+  // đo lại khi header đổi kích thước (Tailwind nạp xong, mở menu điện thoại, xoay màn hình…)
+  if ('ResizeObserver' in window) new ResizeObserver(setHeaderH).observe(document.querySelector('header'));
+  window.addEventListener('hashchange', route);
+  route();
+</script>
+
+</body>
+</html>
